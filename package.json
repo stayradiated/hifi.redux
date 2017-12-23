@@ -1,0 +1,44 @@
+{
+  "name": "hifi-redux",
+  "version": "1.0.0",
+  "description": "Redux store for hifi.kitchen",
+  "main": "index.js",
+  "author": "George Czabania <george@czabania.com>",
+  "license": "ISC",
+  "scripts": {
+    "build": "pkg-build",
+    "prepublish": "pkg-build",
+    "test": "pkg-test",
+    "coverage": "pkg-coverage",
+    "lint": "pkg-lint"
+  },
+  "devDependencies": {
+    "@mishguru/package": "^1.15.3"
+  },
+  "dependencies": {
+    "perplexed": "^2.0.0",
+    "redux": "^3.7.2",
+    "reselect": "^3.0.1"
+  },
+  "babel": {
+    "presets": [
+      "flow",
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "transform-object-rest-spread",
+        {
+          "useBuiltIns": true
+        }
+      ]
+    ]
+  }
+}
