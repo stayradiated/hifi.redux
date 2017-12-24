@@ -2,7 +2,7 @@ import { ServerConnection } from 'perplexed'
 
 import { createFetchMapStore } from '../../storeTemplates'
 
-import { FETCH_SERVER_STATUS } from '../constants'
+import { FETCH_SERVER_STATUS } from '../../constants'
 import { fetchAccountServers } from './account'
 import { selectAllConnections } from './connections'
 import { selectAllDevices } from './devices'

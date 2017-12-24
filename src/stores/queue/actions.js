@@ -8,7 +8,7 @@ import {
   PLAY_QUEUE_ITEM,
   STOP_QUEUE,
   MOVE_PLAY_QUEUE_ITEM
-} from '../constants'
+} from '../../constants'
 
 import { selectPlex } from '../plex/instance'
 import { selectAllTracks } from '../tracks/all'

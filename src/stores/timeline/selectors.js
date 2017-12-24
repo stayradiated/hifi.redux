@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { PLAYER_STATE_PAUSED } from '../constants'
+import { PLAYER_STATE_PAUSED } from '../../constants'
 
 import { trackId as selectTrackId } from '../queue/selectors'
 

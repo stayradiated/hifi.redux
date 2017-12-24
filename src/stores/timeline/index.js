@@ -5,7 +5,7 @@ import {
   UPDATE_TIMELINE,
   CREATE_QUEUE,
   PLAY_QUEUE_ITEM
-} from '../constants'
+} from '../../constants'
 
 const initialState = {
   queueItems: new Map(),

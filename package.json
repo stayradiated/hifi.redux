@@ -1,8 +1,8 @@
 {
-  "name": "hifi-redux",
+  "name": "@stayradiated/hifi-redux",
   "version": "1.0.0",
   "description": "Redux store for hifi.kitchen",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "George Czabania <george@czabania.com>",
   "license": "ISC",
   "scripts": {
@@ -13,7 +13,7 @@
     "lint": "pkg-lint"
   },
   "devDependencies": {
-    "@mishguru/package": "^1.15.3"
+    "@mishguru/package": "^2.1.3"
   },
   "dependencies": {
     "perplexed": "^2.0.0",
@@ -22,19 +22,19 @@
   },
   "babel": {
     "presets": [
-      "flow",
+      "@babel/preset-flow",
       [
-        "env",
+        "@babel/preset-env",
         {
           "targets": {
-            "node": "current"
+            "chrome": 40
           }
         }
       ]
     ],
     "plugins": [
       [
-        "transform-object-rest-spread",
+        "@babel/plugin-proposal-object-rest-spread",
         {
           "useBuiltIns": true
         }

@@ -7,7 +7,7 @@ import {
   MOVE_PLAY_QUEUE_ITEM,
   SHUFFLE_PLAY_QUEUE,
   UNSHUFFLE_PLAY_QUEUE
-} from '../constants'
+} from '../../constants'
 
 const initialState = {
   id: null,

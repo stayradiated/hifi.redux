@@ -13,7 +13,7 @@ import {
   SHUFFLE_PLAY_QUEUE,
   UNSHUFFLE_PLAY_QUEUE,
   FETCH_LIBRARY_TRACKS
-} from '../constants'
+} from '../../constants'
 
 const RATE_TRACK = c('RATE_TRACK')
 

@@ -5,7 +5,7 @@ import {
   PLAYER_STATE_STOPPED,
   PLAYER_STATE_PAUSED,
   PLAYER_STATE_PLAYING
-} from '../constants'
+} from '../../constants'
 
 import * as selectTimeline from './selectors'
 import { selectAllTracks } from '../tracks/all'

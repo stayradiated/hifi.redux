@@ -2,7 +2,7 @@ import { normalize } from 'perplexed'
 
 import { createFetchValueStore } from '../../storeTemplates'
 
-import { FETCH_ACCOUNT_SERVERS } from '../constants'
+import { FETCH_ACCOUNT_SERVERS } from '../../constants'
 
 const store = createFetchValueStore({
   constant: FETCH_ACCOUNT_SERVERS,

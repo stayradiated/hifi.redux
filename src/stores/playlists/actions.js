@@ -1,7 +1,7 @@
 import {
   ADD_TRACK_TO_PLAYLIST,
   REMOVE_TRACK_FROM_PLAYLIST
-} from '../constants'
+} from '../../constants'
 
 import { value as getLibrarySections } from '../library/sections/selectors'
 import { selectPlex } from '../plex/instance'

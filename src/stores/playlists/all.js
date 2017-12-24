@@ -7,7 +7,7 @@ import {
   FETCH_LIBRARY_PLAYLISTS,
   FETCH_LIBRARY_PLAYLISTS_REGULAR,
   FETCH_PLAYLIST
-} from '../constants'
+} from '../../constants'
 
 const store = createLibraryTypeStore({
   constant: FETCH_PLAYLIST,

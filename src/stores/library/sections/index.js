@@ -2,7 +2,7 @@ import { actionTypes } from 'redux-localstorage'
 import { AsyncValueReducer } from '@stayradiated/mandarin'
 
 import { rehydrateValueReducer } from '../../../utils'
-import { FETCH_LIBRARY_SECTIONS } from '../../constants'
+import { FETCH_LIBRARY_SECTIONS } from '../../../constants'
 
 const reducer = new AsyncValueReducer({
   defaultValue: [],

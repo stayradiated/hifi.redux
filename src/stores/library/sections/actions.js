@@ -1,6 +1,6 @@
 import { cacheValue } from '@stayradiated/mandarin'
 
-import { FETCH_LIBRARY_SECTIONS } from '../../constants'
+import { FETCH_LIBRARY_SECTIONS } from '../../../constants'
 import * as selectors from './selectors'
 
 export const forceFetchLibrarySections = () => ({

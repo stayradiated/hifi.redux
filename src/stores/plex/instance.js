@@ -2,14 +2,14 @@ import { createSelector } from 'reselect'
 import { Client, Account, Library } from 'perplexed'
 import { actionTypes } from 'redux-localstorage'
 
-import config from '../../config.json'
+import config from '../../../config.json'
 
 import {
   PLEX_INITIALIZE,
   PLEX_USE_SERVER,
   PLEX_USE_LIBRARY_SECTION,
   PLEX_READY
-} from '../constants'
+} from '../../constants'
 
 import { selectUser } from '../user'
 import { selectServerStatus } from '../servers/status'

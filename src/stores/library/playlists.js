@@ -14,7 +14,7 @@ import {
   FETCH_LIBRARY_PLAYLISTS,
   SORT_LIBRARY_PLAYLISTS,
   RESET_LIBRARY_PLAYLISTS
-} from '../constants'
+} from '../../constants'
 
 import { createLibraryTypeList } from '../../storeTemplates'
 

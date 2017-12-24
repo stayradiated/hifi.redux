@@ -1,6 +1,6 @@
 import { TRACK, normalize } from 'perplexed'
 
-import { FETCH_PLAYLIST_ITEMS, RESET_PLAYLIST_ITEMS } from '../constants'
+import { FETCH_PLAYLIST_ITEMS, RESET_PLAYLIST_ITEMS } from '../../constants'
 
 import { createLibraryTypeChildrenStore } from '../../storeTemplates'
 

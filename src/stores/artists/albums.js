@@ -1,6 +1,6 @@
 import { ALBUM } from 'perplexed'
 
-import { FETCH_ARTIST_ALBUMS, RESET_ARTIST_ALBUMS } from '../constants'
+import { FETCH_ARTIST_ALBUMS, RESET_ARTIST_ALBUMS } from '../../constants'
 
 import { createLibraryTypeChildrenStore } from '../../storeTemplates'
 

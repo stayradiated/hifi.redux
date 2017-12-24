@@ -17,7 +17,7 @@ import {
   FETCH_LIBRARY_TRACKS,
   SORT_LIBRARY_TRACKS,
   RESET_LIBRARY_TRACKS
-} from '../constants'
+} from '../../constants'
 
 import { createLibraryTypeList } from '../../storeTemplates'
 

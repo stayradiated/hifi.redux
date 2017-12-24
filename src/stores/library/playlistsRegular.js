@@ -9,7 +9,7 @@ import {
   FETCH_LIBRARY_PLAYLISTS_REGULAR,
   SORT_LIBRARY_PLAYLISTS_REGULAR,
   RESET_LIBRARY_PLAYLISTS_REGULAR
-} from '../constants'
+} from '../../constants'
 
 import { createLibraryTypeList } from '../../storeTemplates'
 

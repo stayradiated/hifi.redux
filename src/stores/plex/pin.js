@@ -7,7 +7,7 @@ import {
 import {
   PLEX_CHECK_PIN,
   PLEX_FETCH_PIN
-} from '../constants'
+} from '../../constants'
 
 const rootSelector = (root) => root.plex.pin
 const selectPin = createValueSelector(rootSelector)

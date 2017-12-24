@@ -1,7 +1,7 @@
 import { actionTypes } from 'redux-localstorage'
 import { createSelector } from 'reselect'
 
-import { PLEX_CHECK_PIN, PLEX_AUTHENTICATE } from '../constants'
+import { PLEX_CHECK_PIN, PLEX_AUTHENTICATE } from '../../constants'
 
 const initialState = {
   authToken: null

@@ -6,7 +6,7 @@ import {
   FETCH_SEARCH_RESULTS,
   FETCH_LIBRARY_ARTISTS,
   FETCH_ARTIST
-} from '../constants'
+} from '../../constants'
 
 const store = createLibraryTypeStore({
   constant: FETCH_ARTIST,

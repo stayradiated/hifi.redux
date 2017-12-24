@@ -10,7 +10,7 @@ import {
   FETCH_LIBRARY_ARTISTS,
   SORT_LIBRARY_ARTISTS,
   RESET_LIBRARY_ARTISTS
-} from '../constants'
+} from '../../constants'
 
 import { createLibraryTypeList } from '../../storeTemplates'
 

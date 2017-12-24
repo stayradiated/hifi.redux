@@ -1,6 +1,6 @@
 import { AsyncValueReducer } from '@stayradiated/mandarin'
 
-import { FETCH_SEARCH_RESULTS } from '../constants'
+import { FETCH_SEARCH_RESULTS } from '../../constants'
 
 const searchReducer = new AsyncValueReducer({
   defaultValue: {

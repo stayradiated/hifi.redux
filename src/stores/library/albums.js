@@ -14,7 +14,7 @@ import {
   FETCH_LIBRARY_ALBUMS,
   SORT_LIBRARY_ALBUMS,
   RESET_LIBRARY_ALBUMS
-} from '../constants'
+} from '../../constants'
 
 import { createLibraryTypeList } from '../../storeTemplates'
 

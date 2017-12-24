@@ -4,7 +4,7 @@ import {
   UI_SET_DISPLAY_QUEUE,
   UI_SET_DISPLAY_PLAYER,
   UI_SET_TRACK_TO_ADD_TO_PLAYLIST
-} from '../constants'
+} from '../../constants'
 
 const initialState = {
   displayQueue: false,

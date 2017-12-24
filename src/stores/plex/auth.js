@@ -5,7 +5,7 @@ import {
 
 import {
   PLEX_AUTHENTICATE
-} from '../constants'
+} from '../../constants'
 
 export const authenticatePlex = (username, password) => ({
   types: PLEX_AUTHENTICATE,

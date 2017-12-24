@@ -12,6 +12,8 @@ import plexMiddleware from './middleware/plex'
 
 import rootReducer from './stores'
 
+export * from './constants'
+
 export default function store (options = {}) {
   const middleware = applyMiddleware(
     ...options.middleware,

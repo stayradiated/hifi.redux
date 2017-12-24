@@ -1,6 +1,6 @@
 import { createPassiveMapStore } from '../../storeTemplates'
 
-import { FETCH_ACCOUNT_SERVERS } from '../constants'
+import { FETCH_ACCOUNT_SERVERS } from '../../constants'
 
 const store = createPassiveMapStore({
   entity: 'devices',
