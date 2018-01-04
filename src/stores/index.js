@@ -16,6 +16,16 @@ import tracks from './tracks'
 import ui from './ui'
 import user from './user'
 
+import * as queueActions from './queue/actions'
+import * as queueSelectors from './queue/selectors'
+import * as searchActions from './search/actions'
+import * as searchSelectors from './search/selectors'
+import * as timelineActions from './timeline/actions'
+import * as timelineSelectors from './timeline/selectors'
+import * as playlistsActions from './playlists/actions'
+import * as librarySectionsActions from './library/sections/actions'
+import * as librarySectionsSelectors from './library/sections/selectors'
+
 type Options = {
   reducers: Object
 }
@@ -38,6 +48,26 @@ const createRootReducer = (options: Options) => {
     ui,
     user
   })
+}
+
+const actions = {
+  librarySections: librarySectionsActions,
+  playlists: playlistsActions,
+  queue: queueActions,
+  search: searchActions,
+  timeline: timelineActions
+}
+
+const selectors = {
+  librarySections: librarySectionsSelectors,
+  queue: queueSelectors,
+  search: searchSelectors,
+  timeline: timelineSelectors
+}
+
+export {
+  actions,
+  selectors
 }
 
 export default createRootReducer
