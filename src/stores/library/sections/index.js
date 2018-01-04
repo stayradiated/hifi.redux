@@ -8,14 +8,14 @@ import { FETCH_LIBRARY_SECTIONS } from '../../../constants'
 
 import type { ReduxAction } from '../../../types'
 
-const reducer = new AsyncValueReducer({
+const asyncReducer = new AsyncValueReducer({
   defaultValue: [],
   getValue: (action) => action.value.sections
 })
 
-export default function (state: Object, action: ReduxAction) {
+const reducer = (state: Object, action: ReduxAction) => {
   if (state == null) {
-    state = reducer.initialState
+    state = asyncReducer.initialState
   }
 
   switch (action.type) {
@@ -23,15 +23,17 @@ export default function (state: Object, action: ReduxAction) {
       return rehydrateValueReducer(state, action.payload, ['library', 'sections'])
 
     case FETCH_LIBRARY_SECTIONS.REQUEST:
-      return reducer.handleRequest(state, action)
+      return asyncReducer.handleRequest(state, action)
 
     case FETCH_LIBRARY_SECTIONS.FAILURE:
-      return reducer.handleFailure(state, action)
+      return asyncReducer.handleFailure(state, action)
 
     case FETCH_LIBRARY_SECTIONS.SUCCESS:
-      return reducer.handleSuccess(state, action)
+      return asyncReducer.handleSuccess(state, action)
 
     default:
       return state
   }
 }
+
+export default reducer

@@ -5,14 +5,14 @@ import { createSelector } from 'reselect'
 import { selectPlex } from '../plex/instance'
 import { selectAllTracks } from '../tracks/all'
 
-export const root = (state: Object) => state.queue
+const root = (state: Object) => state.queue
 
-export const queueId = createSelector(root, (_root) => _root.id)
-export const items = createSelector(root, (_root) => _root.items)
-export const selectedItemId = createSelector(root, (_root) => _root.selectedItemId)
-export const shuffled = createSelector(root, (_root) => _root.shuffled)
+const queueId = createSelector(root, (_root) => _root.id)
+const items = createSelector(root, (_root) => _root.items)
+const selectedItemId = createSelector(root, (_root) => _root.selectedItemId)
+const shuffled = createSelector(root, (_root) => _root.shuffled)
 
-export const queueItem = createSelector(
+const queueItem = createSelector(
   root,
   (_root) => {
     const item = _root.items.find((qI) => qI.id === _root.selectedItemId)
@@ -23,7 +23,7 @@ export const queueItem = createSelector(
   }
 )
 
-export const trackId = createSelector(
+const trackId = createSelector(
   queueItem,
   (_item) => {
     if (_item == null) {
@@ -33,14 +33,14 @@ export const trackId = createSelector(
   }
 )
 
-export const track = createSelector(
+const track = createSelector(
   trackId, selectAllTracks.values,
   (_trackId, allTracks) => {
     return allTracks.get(_trackId) || null
   }
 )
 
-export const trackSrc = createSelector(
+const trackSrc = createSelector(
   track, selectPlex.library,
   (_track, library) => {
     if (library != null && _track != null) {
@@ -49,3 +49,15 @@ export const trackSrc = createSelector(
     return null
   }
 )
+
+export {
+  root,
+  queueId,
+  items,
+  selectedItemId,
+  shuffled,
+  queueItem,
+  trackId,
+  track,
+  trackSrc
+}

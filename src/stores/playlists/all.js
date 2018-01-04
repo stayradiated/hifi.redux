@@ -25,7 +25,15 @@ const store = createLibraryTypeStore({
     normalize(library.playlist(playlistId))
 })
 
-export const reducer = store.reducer
-export const forceFetchPlaylist = store.forceFetchType
-export const fetchPlaylist = store.fetchType
-export const selectAllPlaylists = store.selectors
+const reducer = store.reducer
+const fetchPlaylist = store.fetchType
+const forceFetchPlaylist = store.forceFetchType
+const selectAllPlaylists = store.selectors
+
+export {
+  fetchPlaylist,
+  forceFetchPlaylist,
+  selectAllPlaylists
+}
+
+export default reducer

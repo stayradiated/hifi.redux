@@ -11,7 +11,7 @@ const initialState = {
   authToken: null
 }
 
-export default function reducer (state: Object, action: ReduxAction) {
+const reducer = (state: Object, action: ReduxAction) => {
   if (state == null) {
     state = initialState
   }
@@ -43,7 +43,13 @@ export default function reducer (state: Object, action: ReduxAction) {
 
 const rootSelector = (state) => state.user
 
-export const selectUser = {
+const selectUser = {
   loggedIn: createSelector(rootSelector, (root) => !!root.authToken),
   authToken: createSelector(rootSelector, (root) => root.authToken)
 }
+
+export {
+  selectUser
+}
+
+export default reducer

@@ -16,7 +16,7 @@ const searchReducer = new AsyncValueReducer({
   getValue: (action) => action.value.entities.hubs
 })
 
-export default function (state: Object, action: ReduxAction) {
+const reducer = (state: Object, action: ReduxAction) => {
   if (state == null) {
     state = searchReducer.initialState
   }
@@ -35,3 +35,5 @@ export default function (state: Object, action: ReduxAction) {
       return state
   }
 }
+
+export default reducer

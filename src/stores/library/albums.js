@@ -47,9 +47,19 @@ const store = createLibraryTypeList({
   }
 })
 
-export const reducer = store.reducer
-export const fetchLibraryAlbumsRange = store.fetchLibraryTypeRange
-export const forceFetchLibraryAlbumsRange = store.forceFetchLibraryTypeRange
-export const resetLibraryAlbums = store.resetLibraryType
-export const selectLibraryAlbums = store.selectors
-export const sortLibraryAlbums = store.sortLibraryType
+const reducer = store.reducer
+const fetchLibraryAlbumsRange = store.fetchLibraryTypeRange
+const forceFetchLibraryAlbumsRange = store.forceFetchLibraryTypeRange
+const resetLibraryAlbums = store.resetLibraryType
+const selectLibraryAlbums = store.selectors
+const sortLibraryAlbums = store.sortLibraryType
+
+export {
+  fetchLibraryAlbumsRange,
+  forceFetchLibraryAlbumsRange,
+  resetLibraryAlbums,
+  selectLibraryAlbums,
+  sortLibraryAlbums
+}
+
+export default reducer

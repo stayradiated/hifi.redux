@@ -52,7 +52,7 @@ const store = createLibraryTypeStore({
   }
 })
 
-export const rateTrack = (trackId: string, rating: number) => ({
+const rateTrack = (trackId: string, rating: number) => ({
   types: RATE_TRACK,
   payload: { trackId, rating },
   meta: {
@@ -60,7 +60,16 @@ export const rateTrack = (trackId: string, rating: number) => ({
   }
 })
 
-export const reducer = store.reducer
-export const forceFetchTrack = store.forceFetchType
-export const fetchTrack = store.fetchType
-export const selectAllTracks = store.selectors
+const reducer = store.reducer
+const forceFetchTrack = store.forceFetchType
+const fetchTrack = store.fetchType
+const selectAllTracks = store.selectors
+
+export {
+  forceFetchTrack,
+  fetchTrack,
+  selectAllTracks,
+  rateTrack
+}
+
+export default reducer

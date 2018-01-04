@@ -20,7 +20,7 @@ const initialState = {
   shuffled: false
 }
 
-export default function (state: Object, action: ReduxAction) {
+const reducer = (state: Object, action: ReduxAction) => {
   if (state == null) {
     state = initialState
   }
@@ -99,3 +99,5 @@ export default function (state: Object, action: ReduxAction) {
       return state
   }
 }
+
+export default reducer

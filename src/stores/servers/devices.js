@@ -13,5 +13,11 @@ const store = createPassiveMapStore({
   }
 })
 
-export const reducer = store.reducer
-export const selectAllDevices = store.selectors
+const reducer = store.reducer
+const selectAllDevices = store.selectors
+
+export {
+  selectAllDevices
+}
+
+export default reducer

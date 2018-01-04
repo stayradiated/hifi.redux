@@ -64,7 +64,6 @@ const reducer = (state: Object, action: ReduxAction) => {
 export {
   fetchPin,
   checkPin,
-  reducer,
   selectPin
 }
 

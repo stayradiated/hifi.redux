@@ -2,10 +2,10 @@
 
 import { combineReducers } from 'redux'
 
-import { reducer as account } from './account'
-import { reducer as devices } from './devices'
-import { reducer as connections } from './connections'
-import { reducer as status } from './status'
+import account from './account'
+import devices from './devices'
+import connections from './connections'
+import status from './status'
 
 export default combineReducers({
   account,

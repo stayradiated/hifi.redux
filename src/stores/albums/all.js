@@ -23,7 +23,15 @@ const store = createLibraryTypeStore({
   ]
 })
 
-export const reducer = store.reducer
-export const forceFetchAlbum = store.forceFetchType
-export const fetchAlbum = store.fetchType
-export const selectAllAlbums = store.selectors
+const reducer = store.reducer
+const fetchAlbum = store.fetchType
+const forceFetchAlbum = store.forceFetchType
+const selectAllAlbums = store.selectors
+
+export {
+  fetchAlbum,
+  forceFetchAlbum,
+  selectAllAlbums
+}
+
+export default reducer

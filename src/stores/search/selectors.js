@@ -18,11 +18,19 @@ const trackHub = exportValue(selectors, 'track')
 const resolve = (hub, allItems) =>
   hub.items.map((item) => allItems.get(item.id))
 
-export default {
-  ...selectors,
+const { error, fetched, promise, value } = selectors
+const artists = createSelector(artistHub, selectAllArtists.values, resolve)
+const albums = createSelector(albumHub, selectAllAlbums.values, resolve)
+const tracks = createSelector(trackHub, selectAllTracks.values, resolve)
+const playlists = createSelector(playlistHub, selectAllPlaylists.values, resolve)
 
-  artists: createSelector(artistHub, selectAllArtists.values, resolve),
-  albums: createSelector(albumHub, selectAllAlbums.values, resolve),
-  tracks: createSelector(trackHub, selectAllTracks.values, resolve),
-  playlists: createSelector(playlistHub, selectAllPlaylists.values, resolve)
+export {
+  error,
+  fetched,
+  promise,
+  value,
+  artists,
+  albums,
+  tracks,
+  playlists
 }

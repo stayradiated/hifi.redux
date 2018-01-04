@@ -20,7 +20,15 @@ const store = createFetchValueStore({
   }
 })
 
-export const reducer = store.reducer
-export const fetchAccountServers = store.fetchValue
-export const forceFetchAccountServers = store.forceFetchValue
-export const selectAccountServers = store.selectors
+const reducer = store.reducer
+const fetchAccountServers = store.fetchValue
+const forceFetchAccountServers = store.forceFetchValue
+const selectAccountServers = store.selectors
+
+export {
+  fetchAccountServers,
+  forceFetchAccountServers,
+  selectAccountServers
+}
+
+export default reducer

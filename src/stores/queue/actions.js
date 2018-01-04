@@ -21,7 +21,7 @@ import * as selectors from './selectors'
 
 import type { Instance } from '../../types'
 
-export const fetchQueue = (queueId: number) => ({
+const fetchQueue = (queueId: number) => ({
   types: FETCH_QUEUE,
   payload: { queueId },
   meta: {
@@ -36,7 +36,7 @@ type $createQueueOptions = {
   initialTrackId: number,
 }
 
-export const createQueue = (options: $createQueueOptions) => ({
+const createQueue = (options: $createQueueOptions) => ({
   types: CREATE_QUEUE,
   payload: { ...options },
   meta: {
@@ -50,7 +50,7 @@ type $createQueueFromURIOptions = {
   initialTrackId: number,
 }
 
-export const createQueueFromURI = (options: $createQueueFromURIOptions) => {
+const createQueueFromURI = (options: $createQueueFromURIOptions) => {
   const { source, key, initialTrackId } = options
 
   return (dispatch: Function, getState: Function) => {
@@ -66,7 +66,7 @@ export const createQueueFromURI = (options: $createQueueFromURIOptions) => {
   }
 }
 
-export const createQueueFromPlexMix = (trackId: number) => (dispatch: Function, getState: Function) => {
+const createQueueFromPlexMix = (trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allTracks = selectAllTracks.values(state)
   const track = allTracks.get(trackId)
@@ -77,7 +77,7 @@ export const createQueueFromPlexMix = (trackId: number) => (dispatch: Function, 
   }))
 }
 
-export const createQueueFromAlbum = (albumId: number, trackId: number) => (dispatch: Function, getState: Function) => {
+const createQueueFromAlbum = (albumId: number, trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allAlbums = selectAllAlbums.values(state)
   const allTracks = selectAllTracks.values(state)
@@ -91,7 +91,7 @@ export const createQueueFromAlbum = (albumId: number, trackId: number) => (dispa
   }))
 }
 
-export const createQueueFromArtist = (artistId: number, trackId: number) => (dispatch: Function, getState: Function) => {
+const createQueueFromArtist = (artistId: number, trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allArtists = selectAllArtists.values(state)
   const allTracks = selectAllTracks.values(state)
@@ -105,7 +105,7 @@ export const createQueueFromArtist = (artistId: number, trackId: number) => (dis
   }))
 }
 
-export const createQueueFromPlaylist = (playlistId: number, trackId: number) => (dispatch: Function, getState: Function) => {
+const createQueueFromPlaylist = (playlistId: number, trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allTracks = selectAllTracks.values(state)
   const track = allTracks.get(trackId)
@@ -117,7 +117,7 @@ export const createQueueFromPlaylist = (playlistId: number, trackId: number) => 
   }))
 }
 
-export const createQueueFromTrack = (trackId: number) => (dispatch: Function, getState: Function) => {
+const createQueueFromTrack = (trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allTracks = selectAllTracks.values(state)
   const track = allTracks.get(trackId)
@@ -130,7 +130,7 @@ export const createQueueFromTrack = (trackId: number) => (dispatch: Function, ge
   }))
 }
 
-export const playQueueItem = (queueItemId: number, trackId: number) => ({
+const playQueueItem = (queueItemId: number, trackId: number) => ({
   type: PLAY_QUEUE_ITEM,
   payload: {
     selectedItemId: queueItemId,
@@ -143,7 +143,7 @@ type $moveQueueItemOptions = {
   oldIndex: number,
 }
 
-export const moveQueueItem = (options: $moveQueueItemOptions) => (dispatch: Function, getState: Function) => {
+const moveQueueItem = (options: $moveQueueItemOptions) => (dispatch: Function, getState: Function) => {
   const { newIndex, oldIndex } = options
   const state = getState()
   const queueId = selectors.queueId(state)
@@ -162,7 +162,7 @@ export const moveQueueItem = (options: $moveQueueItemOptions) => (dispatch: Func
   })
 }
 
-export const shuffleQueue = () => (dispatch: Function, getState: Function) => {
+const shuffleQueue = () => (dispatch: Function, getState: Function) => {
   const state = getState()
   const playQueueId = selectors.queueId(state)
   return dispatch({
@@ -173,7 +173,7 @@ export const shuffleQueue = () => (dispatch: Function, getState: Function) => {
   })
 }
 
-export const unshuffleQueue = () => (dispatch: Function, getState: Function) => {
+const unshuffleQueue = () => (dispatch: Function, getState: Function) => {
   const state = getState()
   const playQueueId = selectors.queueId(state)
   return dispatch({
@@ -184,13 +184,13 @@ export const unshuffleQueue = () => (dispatch: Function, getState: Function) => 
   })
 }
 
-export const toggleShuffleQueue = () => (dispatch: Function, getState: Function) => {
+const toggleShuffleQueue = () => (dispatch: Function, getState: Function) => {
   const state = getState()
   const shuffled = selectors.shuffled(state)
   return dispatch(shuffled ? unshuffleQueue() : shuffleQueue())
 }
 
-export const jumpToRelativeQueueItem = (delta: number) => (dispatch: Function, getState: Function) => {
+const jumpToRelativeQueueItem = (delta: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const selectedItemId = selectors.selectedItemId(state)
   const items = selectors.items(state)
@@ -200,14 +200,34 @@ export const jumpToRelativeQueueItem = (delta: number) => (dispatch: Function, g
   return dispatch(playQueueItem(nextQueueItem.id, nextQueueItem.track))
 }
 
-export const playNextTrack = () => {
+const playNextTrack = () => {
   return jumpToRelativeQueueItem(1)
 }
 
-export const playPrevTrack = () => {
+const playPrevTrack = () => {
   return jumpToRelativeQueueItem(-1)
 }
 
-export const stopQueue = () => ({
+const stopQueue = () => ({
   type: STOP_QUEUE
 })
+
+export {
+  fetchQueue,
+  createQueue,
+  createQueueFromURI,
+  createQueueFromPlexMix,
+  createQueueFromAlbum,
+  createQueueFromArtist,
+  createQueueFromPlaylist,
+  createQueueFromTrack,
+  playQueueItem,
+  moveQueueItem,
+  shuffleQueue,
+  unshuffleQueue,
+  toggleShuffleQueue,
+  jumpToRelativeQueueItem,
+  playNextTrack,
+  playPrevTrack,
+  stopQueue
+}

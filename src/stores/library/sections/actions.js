@@ -7,14 +7,19 @@ import * as selectors from './selectors'
 
 import type { Instance } from '../../../types'
 
-export const forceFetchLibrarySections = () => ({
+const forceFetchLibrarySections = () => ({
   types: FETCH_LIBRARY_SECTIONS,
   meta: {
     plex: ({ library }: Instance) => library.sections()
   }
 })
 
-export const fetchLibrarySections = cacheValue(() => ({
+const fetchLibrarySections = cacheValue(() => ({
   selectors,
   dispatch: forceFetchLibrarySections
 }))
+
+export {
+  fetchLibrarySections,
+  forceFetchLibrarySections
+}

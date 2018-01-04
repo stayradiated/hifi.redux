@@ -25,11 +25,11 @@ const initialState = {
   libarySectionId: null
 }
 
-export const setPlexReady = () => ({
+const setPlexReady = () => ({
   type: PLEX_READY
 })
 
-export const usePlexServerConnection = (serverId: number, serverConnection: ServerConnection) => {
+const usePlexServerConnection = (serverId: number, serverConnection: ServerConnection) => {
   const library = new Library(serverConnection)
 
   return {
@@ -38,7 +38,7 @@ export const usePlexServerConnection = (serverId: number, serverConnection: Serv
   }
 }
 
-export const usePlexServer = (serverId: number) => {
+const usePlexServer = (serverId: number) => {
   return (dispatch: Function, getState: Function) => {
     const state = getState()
 
@@ -51,21 +51,21 @@ export const usePlexServer = (serverId: number) => {
   }
 }
 
-export const clearPlexServerConnection = () => {
+const clearPlexServerConnection = () => {
   return {
     type: PLEX_USE_SERVER,
     payload: { serverConnection: null, library: null }
   }
 }
 
-export const usePlexLibrarySection = (librarySectionId: number) => {
+const usePlexLibrarySection = (librarySectionId: number) => {
   return {
     type: PLEX_USE_LIBRARY_SECTION,
     payload: { librarySectionId }
   }
 }
 
-export default function reducer (state: Object, action: ReduxAction) {
+function reducer (state: Object, action: ReduxAction) {
   if (state == null) {
     state = initialState
   }
@@ -102,7 +102,7 @@ export default function reducer (state: Object, action: ReduxAction) {
 
 const rootSelector = (state: Object) => state.plex.instance
 
-export const selectPlex = {
+const selectPlex = {
   root: rootSelector,
   ready: createSelector(rootSelector, (root) => root.ready),
   account: createSelector(rootSelector, (root) => root.account),
@@ -112,3 +112,14 @@ export const selectPlex = {
   serverId: createSelector(rootSelector, (root) => root.serverId),
   librarySectionId: createSelector(rootSelector, (root) => root.librarySectionId)
 }
+
+export {
+  clearPlexServerConnection,
+  selectPlex,
+  setPlexReady,
+  usePlexLibrarySection,
+  usePlexServer,
+  usePlexServerConnection
+}
+
+export default reducer

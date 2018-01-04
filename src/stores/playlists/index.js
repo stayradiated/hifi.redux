@@ -2,8 +2,8 @@
 
 import { combineReducers } from 'redux'
 
-import { reducer as all } from './all'
-import { reducer as items } from './items'
+import all from './all'
+import items from './items'
 
 export default combineReducers({
   all,

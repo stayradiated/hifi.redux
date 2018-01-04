@@ -6,15 +6,15 @@ import { PLAYER_STATE_PAUSED } from '../../constants'
 
 import { trackId as selectTrackId } from '../queue/selectors'
 
-export const root = (state: Object) => state.timeline
-export const queueItems = createSelector(root, (_root) => _root.queueItems)
+const root = (state: Object) => state.timeline
+const queueItems = createSelector(root, (_root) => _root.queueItems)
 
-export const currentQueueItem = createSelector(
+const currentQueueItem = createSelector(
   queueItems, selectTrackId,
   (_queueItems, _trackId) => _queueItems.get(_trackId)
 )
 
-export const currentTime = createSelector(
+const currentTime = createSelector(
   currentQueueItem,
   (_currentQueueItem) => {
     return _currentQueueItem
@@ -23,7 +23,7 @@ export const currentTime = createSelector(
   }
 )
 
-export const playerState = createSelector(
+const playerState = createSelector(
   currentQueueItem,
   (_currentQueueItem) => {
     return _currentQueueItem
@@ -31,3 +31,11 @@ export const playerState = createSelector(
       : PLAYER_STATE_PAUSED
   }
 )
+
+export {
+  root,
+  queueItems,
+  currentQueueItem,
+  currentTime,
+  playerState
+}

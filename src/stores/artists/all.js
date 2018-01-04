@@ -21,7 +21,15 @@ const store = createLibraryTypeStore({
   ]
 })
 
-export const reducer = store.reducer
-export const forceFetchArtist = store.forceFetchType
-export const fetchArtist = store.fetchType
-export const selectAllArtists = store.selectors
+const reducer = store.reducer
+const fetchArtist = store.fetchType
+const forceFetchArtist = store.forceFetchType
+const selectAllArtists = store.selectors
+
+export {
+  fetchArtist,
+  forceFetchArtist,
+  selectAllArtists
+}
+
+export default reducer

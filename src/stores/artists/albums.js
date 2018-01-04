@@ -18,8 +18,17 @@ const store = createLibraryTypeChildrenStore({
   }
 })
 
-export const reducer = store.reducer
-export const fetchArtistAlbums = store.fetchTypeChildren
-export const forceFetchArtistAlbums = store.forceFetchTypeChildren
-export const resetArtistAlbums = store.resetTypeChildren
-export const selectAllArtistAlbums = store.selectors
+const reducer = store.reducer
+const fetchArtistAlbums = store.fetchTypeChildren
+const forceFetchArtistAlbums = store.forceFetchTypeChildren
+const resetArtistAlbums = store.resetTypeChildren
+const selectAllArtistAlbums = store.selectors
+
+export {
+  fetchArtistAlbums,
+  forceFetchArtistAlbums,
+  resetArtistAlbums,
+  selectAllArtistAlbums
+}
+
+export default reducer

@@ -1,13 +1,13 @@
 /* @flow */
 
 import middleware from './middleware'
-import createRootReducer, { actions, selectors } from './stores'
+import createRootReducer from './stores'
 import initializePlex from './initializePlex'
+
+export * from './stores'
 
 export {
   initializePlex,
   middleware,
-  createRootReducer,
-  actions,
-  selectors
+  createRootReducer
 }

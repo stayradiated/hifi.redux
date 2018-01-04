@@ -85,8 +85,6 @@ const reducer = (state: Object, action: ReduxAction) => {
 }
 
 export {
-  reducer,
-
   setDisplayQueue,
   toggleDisplayQueue,
   setDisplayPlayer,

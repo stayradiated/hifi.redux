@@ -30,8 +30,17 @@ const store = createLibraryTypeChildrenStore({
       playlistId, { start, size: end - start }))
 })
 
-export const reducer = store.reducer
-export const fetchPlaylistItems = store.fetchTypeChildren
-export const forceFetchPlaylistItems = store.forceFetchTypeChildren
-export const resetPlaylistItems = store.resetTypeChildren
-export const selectAllPlaylistItems = store.selectors
+const reducer = store.reducer
+const fetchPlaylistItems = store.fetchTypeChildren
+const forceFetchPlaylistItems = store.forceFetchTypeChildren
+const resetPlaylistItems = store.resetTypeChildren
+const selectAllPlaylistItems = store.selectors
+
+export {
+  fetchPlaylistItems,
+  forceFetchPlaylistItems,
+  resetPlaylistItems,
+  selectAllPlaylistItems
+}
+
+export default reducer

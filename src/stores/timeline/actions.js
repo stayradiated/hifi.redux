@@ -17,7 +17,7 @@ import type { Dispatch, GetState, QueueItem, Instance } from '../../types'
 type $updateTimelineOptions = {
 }
 
-export const updateTimeline = (options: $updateTimelineOptions) => ({
+const updateTimeline = (options: $updateTimelineOptions) => ({
   types: UPDATE_TIMELINE,
   payload: options,
   meta: {
@@ -25,7 +25,7 @@ export const updateTimeline = (options: $updateTimelineOptions) => ({
   }
 })
 
-export const updatePlayerState = (playerState: string, queueItem: QueueItem) => {
+const updatePlayerState = (playerState: string, queueItem: QueueItem) => {
   if (queueItem == null) {
     throw new Error('queueItem cannot be null')
   }
@@ -55,19 +55,28 @@ export const updatePlayerState = (playerState: string, queueItem: QueueItem) => 
   }
 }
 
-export const sendTimelinePlay = (queueItem: QueueItem) => {
+const sendTimelinePlay = (queueItem: QueueItem) => {
   return updatePlayerState(PLAYER_STATE_PLAYING, queueItem)
 }
 
-export const sendTimelinePause = (queueItem: QueueItem) => {
+const sendTimelinePause = (queueItem: QueueItem) => {
   return updatePlayerState(PLAYER_STATE_PAUSED, queueItem)
 }
 
-export const sendTimelineStop = (queueItem: QueueItem) => {
+const sendTimelineStop = (queueItem: QueueItem) => {
   return updatePlayerState(PLAYER_STATE_STOPPED, queueItem)
 }
 
-export const setPlayerCurrentTime = (queueItem: QueueItem, currentTime: number) => ({
+const setPlayerCurrentTime = (queueItem: QueueItem, currentTime: number) => ({
   type: SET_PLAYER_CURRENT_TIME,
   payload: { trackId: queueItem.track, currentTime }
 })
+
+export {
+  updateTimeline,
+  updatePlayerState,
+  sendTimelinePlay,
+  sendTimelinePause,
+  sendTimelineStop,
+  setPlayerCurrentTime
+}

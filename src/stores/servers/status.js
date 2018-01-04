@@ -82,7 +82,15 @@ const store = createFetchMapStore({
   })
 })
 
-export const reducer = store.reducer
-export const fetchServerStatus = store.fetchMap
-export const forceFetchServerStatus = store.forceFetch
-export const selectServerStatus = store.selectors
+const reducer = store.reducer
+const fetchServerStatus = store.fetchMap
+const forceFetchServerStatus = store.forceFetch
+const selectServerStatus = store.selectors
+
+export {
+  fetchServerStatus,
+  forceFetchServerStatus,
+  selectServerStatus
+}
+
+export default reducer

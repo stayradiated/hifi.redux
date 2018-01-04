@@ -11,7 +11,7 @@ import {
 
 import type { Instance, ReduxAction } from '../../types'
 
-export const authenticatePlex = (username: string, password: string) => ({
+const authenticatePlex = (username: string, password: string) => ({
   types: PLEX_AUTHENTICATE,
   payload: { username, password },
   meta: {
@@ -48,6 +48,11 @@ const reducer = (state: Object, action: ReduxAction) => {
 
 const rootSelector = (root) => root.plex.auth
 
-export const selectPlexAuth = createValueSelector(rootSelector)
+const selectPlexAuth = createValueSelector(rootSelector)
+
+export {
+  authenticatePlex,
+  selectPlexAuth
+}
 
 export default reducer

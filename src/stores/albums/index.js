@@ -2,8 +2,8 @@
 
 import { combineReducers } from 'redux'
 
-import { reducer as all } from './all'
-import { reducer as tracks } from './tracks'
+import all from './all'
+import tracks from './tracks'
 
 export default combineReducers({
   all,
