@@ -7,7 +7,7 @@
   "license": "ISC",
   "scripts": {
     "build": "rollup -c",
-    "prepublish": "pkg-build",
+    "prepublish": "rollup -c",
     "test": "pkg-test",
     "flow": "pkg-flow",
     "coverage": "pkg-coverage",

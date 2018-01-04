@@ -63,7 +63,7 @@ const handleFetchServerStatus = (serverId: string) => {
     const server = allDevices.get(serverId)
     const connections = server.connections.map((id) => allConnections.get(id))
 
-    dispatch({
+    return dispatch({
       types: FETCH_SERVER_STATUS,
       payload: { id: serverId },
       meta: {
