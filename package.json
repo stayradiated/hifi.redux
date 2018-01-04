@@ -20,13 +20,13 @@
     "rollup": "^0.53.3",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-local-resolve": "^1.0.7",
-    "eslint-config-mishguru": "^1.9.1"
+    "eslint-config-mishguru": "^1.10.0"
   },
   "dependencies": {
     "@stayradiated/mandarin": "^1.14.0",
     "perplexed": "^2.0.0",
     "redux": "^3.7.2",
-    "redux-localstorage": "^0.4.1",
+    "redux-localstorage": "1.0.0-rc5",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1"
