@@ -1,6 +1,6 @@
 {
   "name": "@stayradiated/hifi-redux",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Redux store for hifi.kitchen",
   "main": "dist/index.js",
   "author": "George Czabania <george@czabania.com>",
