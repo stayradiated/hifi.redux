@@ -1,6 +1,8 @@
+/* @flow */
+
 import { ARTIST } from 'perplexed'
 
-import { createLibraryTypeStore } from '../../storeTemplates'
+import { createLibraryTypeStore } from '../../templates'
 
 import {
   FETCH_SEARCH_RESULTS,

@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   SET_PLAYER_CURRENT_TIME,
   UPDATE_TIMELINE,
@@ -10,20 +12,25 @@ import {
 import * as selectTimeline from './selectors'
 import { selectAllTracks } from '../tracks/all'
 
-export const updateTimeline = (options) => ({
+import type { Dispatch, GetState, QueueItem, Instance } from '../../types'
+
+type $updateTimelineOptions = {
+}
+
+export const updateTimeline = (options: $updateTimelineOptions) => ({
   types: UPDATE_TIMELINE,
   payload: options,
   meta: {
-    plex: ({ library }) => library.timeline(options)
+    plex: ({ library }: Instance) => library.timeline(options)
   }
 })
 
-export const updatePlayerState = (playerState, queueItem) => {
+export const updatePlayerState = (playerState: string, queueItem: QueueItem) => {
   if (queueItem == null) {
     throw new Error('queueItem cannot be null')
   }
 
-  return (dispatch, getState) => {
+  return (dispatch: Dispatch, getState: GetState) => {
     const state = getState()
     const currentTime = selectTimeline.currentTime(state)
     const allTracks = selectAllTracks.values(state)
@@ -48,19 +55,19 @@ export const updatePlayerState = (playerState, queueItem) => {
   }
 }
 
-export const sendTimelinePlay = (queueItem) => {
+export const sendTimelinePlay = (queueItem: QueueItem) => {
   return updatePlayerState(PLAYER_STATE_PLAYING, queueItem)
 }
 
-export const sendTimelinePause = (queueItem) => {
+export const sendTimelinePause = (queueItem: QueueItem) => {
   return updatePlayerState(PLAYER_STATE_PAUSED, queueItem)
 }
 
-export const sendTimelineStop = (queueItem) => {
+export const sendTimelineStop = (queueItem: QueueItem) => {
   return updatePlayerState(PLAYER_STATE_STOPPED, queueItem)
 }
 
-export const setPlayerCurrentTime = (queueItem, currentTime) => ({
+export const setPlayerCurrentTime = (queueItem: QueueItem, currentTime: number) => ({
   type: SET_PLAYER_CURRENT_TIME,
   payload: { trackId: queueItem.track, currentTime }
 })

@@ -1,6 +1,8 @@
+/* @flow */
+
 import { normalize } from 'perplexed'
 
-import { createFetchValueStore } from '../../storeTemplates'
+import { createFetchValueStore } from '../../templates'
 
 import { FETCH_ACCOUNT_SERVERS } from '../../constants'
 

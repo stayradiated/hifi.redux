@@ -1,3 +1,5 @@
+/* @flow */
+
 import { createValueSelector } from '@stayradiated/mandarin'
 
 const selectors = createValueSelector((state) => state.library.sections)

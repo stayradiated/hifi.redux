@@ -6,41 +6,56 @@
   "author": "George Czabania <george@czabania.com>",
   "license": "ISC",
   "scripts": {
-    "build": "pkg-build",
+    "build": "rollup -c",
     "prepublish": "pkg-build",
     "test": "pkg-test",
+    "flow": "pkg-flow",
     "coverage": "pkg-coverage",
     "lint": "pkg-lint"
   },
   "devDependencies": {
-    "@mishguru/package": "^2.1.4"
+    "@mishguru/package": "^1.15.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup": "^0.53.3",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "eslint-config-mishguru": "^1.9.1"
   },
   "dependencies": {
+    "@stayradiated/mandarin": "^1.14.0",
     "perplexed": "^2.0.0",
     "redux": "^3.7.2",
+    "redux-localstorage": "^0.4.1",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1"
   },
   "babel": {
     "presets": [
-      "@babel/preset-flow",
+      "flow",
       [
-        "@babel/preset-env",
+        "env",
         {
           "targets": {
-            "node": 0.12
-          },
-          "modules": "commonjs",
-          "useBuiltIns": "usage"
+            "node": "current"
+          }
         }
       ]
     ],
     "plugins": [
       [
-        "@babel/plugin-proposal-object-rest-spread",
+        "transform-object-rest-spread",
         {
           "useBuiltIns": true
         }
       ]
     ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   }
 }

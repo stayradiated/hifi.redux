@@ -26,7 +26,7 @@ export function rehydrateMapReducer (state, payload, keys) {
     errors: remap(cache.errors),
     fetched: remap(cache.fetched),
     promises: remap(cache.promises),
-    values: remap(cache.values),
+    values: remap(cache.values)
   }
 }
 
@@ -39,6 +39,6 @@ export function rehydrateValueReducer (state, payload, keys) {
 
   return {
     ...state,
-    ...cache,
+    ...cache
   }
 }

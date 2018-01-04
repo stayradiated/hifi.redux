@@ -1,11 +1,23 @@
+/* @flow */
+
 import {
   createObjectMergeFunction,
   createMapSelector
 } from '@stayradiated/mandarin'
 
-export default function createPassiveMapStore (options) {
+import type { ReduxAction } from '../types'
+
+type Options = {
+  constants: [string],
+  entity: string,
+  rootSelector: Function,
+  mergeOptions: Object,
+}
+
+export default function createPassiveMapStore (options: Options) {
   const {
-    constants, entity,
+    constants,
+    entity,
     rootSelector,
     mergeOptions = {}
   } = options
@@ -15,10 +27,14 @@ export default function createPassiveMapStore (options) {
   const mergeItems = createObjectMergeFunction(mergeOptions)
 
   const initialState = {
-    values: new Map()
+    values: (new Map(): Map<any, any>)
   }
 
-  const reducer = (state = initialState, action) => {
+  const reducer = (state: Object, action: ReduxAction) => {
+    if (state == null) {
+      state = initialState
+    }
+
     if (constants.includes(action.type)) {
       return {
         ...state,

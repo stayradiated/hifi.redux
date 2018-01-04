@@ -1,10 +1,22 @@
+/* @flow */
+
 import {
   cacheMap,
   AsyncMapReducer,
   createMapSelector
 } from '@stayradiated/mandarin'
 
-export default function createFetchMapStore (options) {
+import type { ReduxType, ReduxAction } from '../types'
+
+type Options = {
+  constant: ReduxType,
+  rootSelector: Function,
+  forceFetch: Function,
+  getCacheOptions: () => Object,
+  reducerOptions?: Object,
+}
+
+export default function createFetchMapStore (options: Options) {
   const {
     constant: TYPE,
     rootSelector,
@@ -23,7 +35,11 @@ export default function createFetchMapStore (options) {
 
   const asyncReducer = new AsyncMapReducer(reducerOptions)
 
-  const reducer = (state = asyncReducer.initialState, action) => {
+  const reducer = (state: Object, action: ReduxAction) => {
+    if (state == null) {
+      state = asyncReducer.initialState
+    }
+
     switch (action.type) {
       case TYPE.REQUEST:
         return asyncReducer.handleRequest(state, action)

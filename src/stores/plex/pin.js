@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   cacheValue,
   createValueSelector,
@@ -9,13 +11,15 @@ import {
   PLEX_FETCH_PIN
 } from '../../constants'
 
+import type { ReduxAction, Instance } from '../../types'
+
 const rootSelector = (root) => root.plex.pin
 const selectPin = createValueSelector(rootSelector)
 
 const forceFetchPin = () => ({
   types: PLEX_FETCH_PIN,
   meta: {
-    plex: ({ account }) => account.requestPin()
+    plex: ({ account }: Instance) => account.requestPin()
   }
 })
 
@@ -25,11 +29,11 @@ const fetchPin = cacheValue(() => ({
   selectors: selectPin
 }))
 
-const checkPin = (pinId) => ({
+const checkPin = (pinId: number) => ({
   types: PLEX_CHECK_PIN,
   payload: { pinId },
   meta: {
-    plex: ({ account }) => account.checkPin(pinId)
+    plex: ({ account }: Instance) => account.checkPin(pinId)
   }
 })
 
@@ -37,7 +41,11 @@ const asyncReducer = new AsyncValueReducer({
   defaultValue: {}
 })
 
-const reducer = (state = asyncReducer.initialState, action) => {
+const reducer = (state: Object, action: ReduxAction) => {
+  if (state == null) {
+    state = asyncReducer.initialState
+  }
+
   switch (action.type) {
     case PLEX_FETCH_PIN.REQUEST:
       return asyncReducer.handleRequest(state, action)

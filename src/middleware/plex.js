@@ -1,7 +1,11 @@
+/* @flow */
+
 import { selectPlex } from '../stores/plex/instance'
 
-export default function plexMiddleware (store) {
-  return (next) => (action) => {
+import type { ReduxAction, ReduxStore } from '../types'
+
+export default function plexMiddleware (store: ReduxStore) {
+  return (next: Function) => (action: ReduxAction) => {
     if (!action || !action.meta || !('plex' in action.meta)) {
       return next(action)
     }

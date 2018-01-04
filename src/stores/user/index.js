@@ -1,13 +1,21 @@
+/* @flow */
+
 import { actionTypes } from 'redux-localstorage'
 import { createSelector } from 'reselect'
 
 import { PLEX_CHECK_PIN, PLEX_AUTHENTICATE } from '../../constants'
 
+import type { ReduxAction } from '../../types'
+
 const initialState = {
   authToken: null
 }
 
-export default function reducer (state = initialState, action) {
+export default function reducer (state: Object, action: ReduxAction) {
+  if (state == null) {
+    state = initialState
+  }
+
   switch (action.type) {
     case actionTypes.INIT:
       return {

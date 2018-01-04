@@ -1,4 +1,6 @@
-import { createPassiveMapStore } from '../../storeTemplates'
+/* @flow */
+
+import { createPassiveMapStore } from '../../templates'
 
 import { FETCH_ACCOUNT_SERVERS } from '../../constants'
 

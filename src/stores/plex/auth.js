@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   createValueSelector,
   AsyncValueReducer
@@ -7,11 +9,13 @@ import {
   PLEX_AUTHENTICATE
 } from '../../constants'
 
-export const authenticatePlex = (username, password) => ({
+import type { Instance, ReduxAction } from '../../types'
+
+export const authenticatePlex = (username: string, password: string) => ({
   types: PLEX_AUTHENTICATE,
   payload: { username, password },
   meta: {
-    plex: ({ account }) =>
+    plex: ({ account }: Instance) =>
       account.authenticate(username, password).catch(() => {
         throw new Error('Error authenticating with Plex')
       })
@@ -22,7 +26,11 @@ const asyncReducer = new AsyncValueReducer({
   defaultValue: {}
 })
 
-const reducer = (state = asyncReducer.initialState, action) => {
+const reducer = (state: Object, action: ReduxAction) => {
+  if (state == null) {
+    state = asyncReducer.initialState
+  }
+
   switch (action.type) {
     case PLEX_AUTHENTICATE.REQUEST:
       return asyncReducer.handleRequest(state, action)

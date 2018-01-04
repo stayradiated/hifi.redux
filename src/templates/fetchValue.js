@@ -1,10 +1,21 @@
+/* @flow */
+
 import {
   cacheValue,
   AsyncValueReducer,
   createValueSelector
 } from '@stayradiated/mandarin'
 
-export default function createFetchValueStore (options) {
+import type { ReduxType, ReduxAction } from '../types'
+
+type $createFetchValueStoreOptions = {
+  constant: ReduxType,
+  rootSelector: Function,
+  getActionOptions: Function,
+  reducerOptions: Object,
+}
+
+export default function createFetchValueStore (options: $createFetchValueStoreOptions) {
   const {
     constant: TYPE,
     rootSelector,
@@ -14,7 +25,7 @@ export default function createFetchValueStore (options) {
 
   const selectors = createValueSelector(rootSelector)
 
-  const forceFetchValue = (...args) => ({
+  const forceFetchValue = (...args: any) => ({
     types: TYPE,
     ...getActionOptions(...args)
   })
@@ -26,7 +37,11 @@ export default function createFetchValueStore (options) {
 
   const asyncReducer = new AsyncValueReducer(reducerOptions)
 
-  const reducer = (state = asyncReducer.initialState, action) => {
+  const reducer = (state: Object, action: ReduxAction) => {
+    if (state == null) {
+      state = asyncReducer.initialState
+    }
+
     switch (action.type) {
       case TYPE.REQUEST:
         return asyncReducer.handleRequest(state, action)

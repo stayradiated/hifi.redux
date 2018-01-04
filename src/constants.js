@@ -1,3 +1,5 @@
+/* @flow */
+
 import { c } from '@stayradiated/mandarin'
 
 export const PLAYLIST = 'playlist'

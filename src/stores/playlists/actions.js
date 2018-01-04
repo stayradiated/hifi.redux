@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   ADD_TRACK_TO_PLAYLIST,
   REMOVE_TRACK_FROM_PLAYLIST
@@ -7,7 +9,7 @@ import { value as getLibrarySections } from '../library/sections/selectors'
 import { selectPlex } from '../plex/instance'
 import { selectAllTracks } from '../tracks/all'
 
-const addTrackToPlaylist = (trackId, playlistId) => (dispatch, getState) => {
+const addTrackToPlaylist = (trackId: number, playlistId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
 
   const sections = getLibrarySections(state)
@@ -30,7 +32,7 @@ const addTrackToPlaylist = (trackId, playlistId) => (dispatch, getState) => {
   })
 }
 
-const removeItemFromPlaylist = (itemId, playlistId) => (dispatch) => {
+const removeItemFromPlaylist = (itemId: number, playlistId: number) => (dispatch: Function) => {
   return dispatch({
     types: REMOVE_TRACK_FROM_PLAYLIST,
     payload: { itemId, playlistId },

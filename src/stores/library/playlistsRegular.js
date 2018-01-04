@@ -11,7 +11,7 @@ import {
   RESET_LIBRARY_PLAYLISTS_REGULAR
 } from '../../constants'
 
-import { createLibraryTypeList } from '../../storeTemplates'
+import { createLibraryTypeList } from '../../templates'
 
 const store = createLibraryTypeList({
   type: PLAYLIST,
@@ -41,9 +41,8 @@ const store = createLibraryTypeList({
 })
 
 export const reducer = store.reducer
-export const fetchCurrentLibraryPlaylistsRegularRange = store.fetchCurrentLibraryTypeRange
 export const fetchLibraryPlaylistsRegularRange = store.fetchLibraryTypeRange
 export const forceFetchLibraryPlaylistsRegularRange = store.forceFetchLibraryTypeRange
-export const resetCurrentLibraryPlaylistsRegular = store.resetCurrentLibraryType
+export const resetLibraryPlaylistsRegular = store.resetLibraryType
 export const selectLibraryPlaylistsRegular = store.selectors
 export const sortLibraryPlaylistsRegular = store.sortLibraryType

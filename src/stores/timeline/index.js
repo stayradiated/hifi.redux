@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   PLAYER_STATE_PAUSED,
   PLAYER_STATE_PLAYING,
@@ -7,8 +9,10 @@ import {
   PLAY_QUEUE_ITEM
 } from '../../constants'
 
+import type { ReduxAction, QueueItem } from '../../types'
+
 const initialState = {
-  queueItems: new Map(),
+  queueItems: (new Map(): Map<string, QueueItem>),
   timeout: null
 }
 
@@ -20,14 +24,18 @@ const initialQueueItemState = {
 const updateItem = (state, id, fn) => {
   const nextState = {
     ...state,
-    queueItems: new Map(state.queueItems)
+    queueItems: (new Map(state.queueItems): Map<string, QueueItem>)
   }
   const item = nextState.queueItems.get(id) || initialQueueItemState
   nextState.queueItems.set(id, fn(item))
   return nextState
 }
 
-export default function (state = initialState, action) {
+export default function (state: Object, action: ReduxAction) {
+  if (state == null) {
+    state = initialState
+  }
+
   switch (action.type) {
     case CREATE_QUEUE.REQUEST: {
       const { initialTrackId } = action.payload

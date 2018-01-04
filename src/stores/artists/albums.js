@@ -1,8 +1,10 @@
+/* @flow */
+
 import { ALBUM } from 'perplexed'
 
 import { FETCH_ARTIST_ALBUMS, RESET_ARTIST_ALBUMS } from '../../constants'
 
-import { createLibraryTypeChildrenStore } from '../../storeTemplates'
+import { createLibraryTypeChildrenStore } from '../../templates'
 
 const store = createLibraryTypeChildrenStore({
   type: ALBUM,

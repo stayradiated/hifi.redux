@@ -1,3 +1,5 @@
+/* @flow */
+
 import { createSelector } from 'reselect'
 
 import {
@@ -5,6 +7,8 @@ import {
   UI_SET_DISPLAY_PLAYER,
   UI_SET_TRACK_TO_ADD_TO_PLAYLIST
 } from '../../constants'
+
+import type { Dispatch, GetState, ReduxAction } from '../../types'
 
 const initialState = {
   displayQueue: false,
@@ -21,31 +25,31 @@ const selectTrackToAddToPlaylist = createSelector(root, (_root) => _root.trackTo
  * DISPLAY QUEUE
  */
 
-const setDisplayQueue = (value) => ({
+const setDisplayQueue = (value: boolean) => ({
   type: UI_SET_DISPLAY_QUEUE,
   payload: value
 })
 
-const toggleDisplayQueue = () => (dispatch, getState) =>
+const toggleDisplayQueue = () => (dispatch: Dispatch, getState: GetState) =>
   dispatch(setDisplayQueue(!selectDisplayQueue(getState())))
 
 /**
  * DISPLAY PLAYER
  */
 
-const setDisplayPlayer = (value) => ({
+const setDisplayPlayer = (value: boolean) => ({
   type: UI_SET_DISPLAY_PLAYER,
   payload: value
 })
 
-const toggleDisplayPlayer = () => (dispatch, getState) =>
+const toggleDisplayPlayer = () => (dispatch: Dispatch, getState: GetState) =>
   dispatch(setDisplayPlayer(!selectDisplayPlayer(getState())))
 
 /**
  * ADD TO PLAYLIST
  */
 
-const setTrackToAddToPlaylist = (trackId) => ({
+const setTrackToAddToPlaylist = (trackId: string) => ({
   type: UI_SET_TRACK_TO_ADD_TO_PLAYLIST,
   payload: trackId
 })
@@ -54,7 +58,11 @@ const setTrackToAddToPlaylist = (trackId) => ({
  * REDUCER
  */
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: Object, action: ReduxAction) => {
+  if (state == null) {
+    state = initialState
+  }
+
   switch (action.type) {
     case UI_SET_DISPLAY_QUEUE:
       return {

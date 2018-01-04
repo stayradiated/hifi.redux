@@ -1,8 +1,10 @@
+/* @flow */
+
 import { TRACK } from 'perplexed'
 
 import { FETCH_ALBUM_TRACKS, RESET_ALBUM_TRACKS } from '../../constants'
 
-import { createLibraryTypeChildrenStore } from '../../storeTemplates'
+import { createLibraryTypeChildrenStore } from '../../templates'
 
 const store = createLibraryTypeChildrenStore({
   type: TRACK,

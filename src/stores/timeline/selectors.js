@@ -1,10 +1,12 @@
+/* @flow */
+
 import { createSelector } from 'reselect'
 
 import { PLAYER_STATE_PAUSED } from '../../constants'
 
 import { trackId as selectTrackId } from '../queue/selectors'
 
-export const root = (state) => state.timeline
+export const root = (state: Object) => state.timeline
 export const queueItems = createSelector(root, (_root) => _root.queueItems)
 
 export const currentQueueItem = createSelector(

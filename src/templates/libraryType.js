@@ -1,3 +1,5 @@
+/* @flow */
+
 import { normalize } from 'perplexed'
 import {
   AsyncMapReducer,
@@ -6,7 +8,19 @@ import {
   createMapSelector
 } from '@stayradiated/mandarin'
 
-export default function createLibraryTypeStore (options) {
+import type { ReduxAction, ReduxType, Instance } from '../types'
+
+type $createLibraryTypeStoreOptions = {
+  entity: string,
+  libraryType: number,
+  constant: ReduxType,
+  rootSelector: Function,
+  mergeActions?: Array<string>,
+  customActions?: Object,
+  fetchItems?: Function,
+}
+
+export default function createLibraryTypeStore (options: $createLibraryTypeStoreOptions) {
   const {
     entity,
     libraryType,
@@ -26,11 +40,11 @@ export default function createLibraryTypeStore (options) {
 
   const selectors = createMapSelector(rootSelector)
 
-  const forceFetchType = (id) => ({
+  const forceFetchType = (id: string) => ({
     types: TYPE,
     payload: { id },
     meta: {
-      plex: (plex) => fetchItems(plex, id)
+      plex: (plex: Instance) => fetchItems(plex, id)
     }
   })
 
@@ -58,7 +72,11 @@ export default function createLibraryTypeStore (options) {
     getId: (item) => item.id
   })
 
-  const reducer = (state = asyncReducer.initialState, action) => {
+  const reducer = (state: Object, action: ReduxAction) => {
+    if (state == null) {
+      state = asyncReducer.initialState
+    }
+
     switch (action.type) {
       case TYPE.REQUEST:
         return asyncReducer.handleRequest(state, action)

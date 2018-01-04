@@ -1,7 +1,9 @@
+/* @flow */
+
 import { TRACK } from 'perplexed'
 import { c } from '@stayradiated/mandarin'
 
-import { createLibraryTypeStore } from '../../storeTemplates'
+import { createLibraryTypeStore } from '../../templates'
 
 import {
   CREATE_QUEUE,
@@ -14,6 +16,8 @@ import {
   UNSHUFFLE_PLAY_QUEUE,
   FETCH_LIBRARY_TRACKS
 } from '../../constants'
+
+import type { Instance } from '../../types'
 
 const RATE_TRACK = c('RATE_TRACK')
 
@@ -48,11 +52,11 @@ const store = createLibraryTypeStore({
   }
 })
 
-export const rateTrack = (trackId, rating) => ({
+export const rateTrack = (trackId: string, rating: number) => ({
   types: RATE_TRACK,
   payload: { trackId, rating },
   meta: {
-    plex: ({ library }) => library.rate(trackId, rating)
+    plex: ({ library }: Instance) => library.rate(trackId, rating)
   }
 })
 

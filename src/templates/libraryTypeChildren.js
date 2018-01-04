@@ -1,3 +1,5 @@
+/* @flow */
+
 import { normalize } from 'perplexed'
 import {
   cacheMapList,
@@ -5,7 +7,20 @@ import {
   AsyncMapListReducer
 } from '@stayradiated/mandarin'
 
-export default function createLibraryTypeChildrenStore (options) {
+import type { ReduxAction, ReduxType, Instance } from '../types'
+
+type $createLibraryTypeChildrenStoreOptions = {
+  type: number,
+  actions: {
+    fetch: ReduxType,
+    reset: string,
+  },
+  rootSelector: Function,
+  reducerOptions: Object,
+  fetchItems?: Function,
+}
+
+export default function createLibraryTypeChildrenStore (options: $createLibraryTypeChildrenStoreOptions) {
   const {
     type: TYPE,
     actions: {
@@ -28,11 +43,11 @@ export default function createLibraryTypeChildrenStore (options) {
 
   const selectors = createMapListSelector(rootSelector)
 
-  const forceFetchTypeChildren = (id, start, end) => ({
+  const forceFetchTypeChildren = (id: string, start: number, end: number) => ({
     types: FETCH_TYPE_CHILDREN,
     payload: { id, start, end },
     meta: {
-      plex: (plex) => fetchItems(plex, id, start, end)
+      plex: (plex: Instance) => fetchItems(plex, id, start, end)
     }
   })
 
@@ -46,7 +61,7 @@ export default function createLibraryTypeChildrenStore (options) {
     })
   )
 
-  const resetTypeChildren = (id) => ({
+  const resetTypeChildren = (id: string) => ({
     type: RESET_TYPE_CHILDREN,
     payload: { id }
   })
@@ -57,7 +72,11 @@ export default function createLibraryTypeChildrenStore (options) {
     ...reducerOptions
   })
 
-  const reducer = (state = asyncReducer.initialState, action) => {
+  const reducer = (state: Object, action: ReduxAction) => {
+    if (state == null) {
+      state = asyncReducer.initialState
+    }
+
     switch (action.type) {
       case RESET_TYPE_CHILDREN:
         return asyncReducer.handleReset(state, action)

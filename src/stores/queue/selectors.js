@@ -1,9 +1,11 @@
+/* @flow */
+
 import { createSelector } from 'reselect'
 
 import { selectPlex } from '../plex/instance'
 import { selectAllTracks } from '../tracks/all'
 
-export const root = (state) => state.queue
+export const root = (state: Object) => state.queue
 
 export const queueId = createSelector(root, (_root) => _root.id)
 export const items = createSelector(root, (_root) => _root.items)

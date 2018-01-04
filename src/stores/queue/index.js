@@ -1,3 +1,5 @@
+/* @flow */
+
 import { actionTypes } from 'redux-localstorage'
 import {
   FETCH_QUEUE,
@@ -9,6 +11,8 @@ import {
   UNSHUFFLE_PLAY_QUEUE
 } from '../../constants'
 
+import type { ReduxAction } from '../../types'
+
 const initialState = {
   id: null,
   selectedItemId: null,
@@ -16,7 +20,11 @@ const initialState = {
   shuffled: false
 }
 
-export default function (state = initialState, action) {
+export default function (state: Object, action: ReduxAction) {
+  if (state == null) {
+    state = initialState
+  }
+
   switch (action.type) {
     case actionTypes.INIT:
       return (action.payload && action.payload.queue)

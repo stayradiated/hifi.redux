@@ -1,3 +1,5 @@
+/* @flow */
+
 import { createSelector } from 'reselect'
 import { normalize } from 'perplexed'
 import {
@@ -6,9 +8,26 @@ import {
   createListSelector
 } from '@stayradiated/mandarin'
 
-import { selectPlex } from '../stores/plex/instance'
+import type { Dispatch, GetState, ReduxAction, ReduxType } from '../types'
 
-export default function createLibraryTypeList (options) {
+type $createLibraryTypeListOptions = {
+  type: number,
+  actions: {
+    fetch: ReduxType,
+    sort: string,
+    reset: string,
+  },
+  sort: {
+    default: string,
+    descending: boolean,
+    options: { [string]: string },
+  },
+  rootSelector: Function,
+  reducerOptions: Object,
+  fetchItems?: Function,
+}
+
+export default function createLibraryTypeList (options: $createLibraryTypeListOptions) {
   const {
     type: TYPE,
     actions: {
@@ -40,11 +59,6 @@ export default function createLibraryTypeList (options) {
 
   const selectors = createListSelector(rootSelector)
 
-  selectors.currentIds = createSelector(
-    selectPlex.librarySectionId,
-    selectors.values,
-    (section, values) => values.get(section) || [])
-
   selectors.sortKey = createSelector(rootSelector, (root) => {
     return root.sortOptions[root.sortBy][root.sortDesc ? 1 : 0]
   })
@@ -58,8 +72,8 @@ export default function createLibraryTypeList (options) {
   selectors.sortOptions = createSelector(rootSelector, (root) =>
     Object.keys(root.sortOptions))
 
-  const forceFetchLibraryTypeRange = (section, start, end) =>
-    (dispatch, getState) => {
+  const forceFetchLibraryTypeRange = (section: string, start: number, end: number) =>
+    (dispatch: Dispatch, getState: GetState) => {
       const sort = selectors.sortKey(getState())
       const params = { start, size: end - start, sort }
 
@@ -84,26 +98,12 @@ export default function createLibraryTypeList (options) {
     })
   )
 
-  const fetchCurrentLibraryTypeRange = (start, end) => {
-    return (dispatch, getState) => {
-      const state = getState()
-      const section = selectPlex.librarySectionId(state)
-      return dispatch(fetchLibraryTypeRange(section, start, end))
-    }
-  }
+  const resetLibraryType = (section: string) => ({
+    type: RESET_LIBRARY_TYPE,
+    payload: { section }
+  })
 
-  const resetCurrentLibraryType = () => {
-    return (dispatch, getState) => {
-      const state = getState()
-      const section = selectPlex.librarySectionId(state)
-      return dispatch({
-        type: RESET_LIBRARY_TYPE,
-        payload: { section }
-      })
-    }
-  }
-
-  const sortLibraryType = (sortBy, sortDesc) => ({
+  const sortLibraryType = (sortBy: string, sortDesc: boolean) => ({
     type: SORT_LIBRARY_TYPE,
     payload: { sortBy, sortDesc }
   })
@@ -121,7 +121,11 @@ export default function createLibraryTypeList (options) {
     sortOptions
   }
 
-  const reducer = (state = initialState, action) => {
+  const reducer = (state: Object, action: ReduxAction) => {
+    if (state == null) {
+      state = initialState
+    }
+
     switch (action.type) {
       case FETCH_LIBRARY_TYPE.REQUEST:
         return asyncReducer.handleRequest(state, action)
@@ -149,11 +153,10 @@ export default function createLibraryTypeList (options) {
   }
 
   return {
-    reducer,
-    fetchCurrentLibraryTypeRange,
     fetchLibraryTypeRange,
     forceFetchLibraryTypeRange,
-    resetCurrentLibraryType,
+    reducer,
+    resetLibraryType,
     selectors,
     sortLibraryType
   }

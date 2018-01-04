@@ -1,8 +1,8 @@
-import { createSelector } from 'reselect'
-import { Client, Account, Library } from 'perplexed'
-import { actionTypes } from 'redux-localstorage'
+/* @flow */
 
-import config from '../../../config.json'
+import { createSelector } from 'reselect'
+import { Library, ServerConnection } from 'perplexed'
+import { actionTypes } from 'redux-localstorage'
 
 import {
   PLEX_INITIALIZE,
@@ -11,8 +11,9 @@ import {
   PLEX_READY
 } from '../../constants'
 
-import { selectUser } from '../user'
 import { selectServerStatus } from '../servers/status'
+
+import type { ReduxAction } from '../../types'
 
 const initialState = {
   ready: false,
@@ -24,24 +25,11 @@ const initialState = {
   libarySectionId: null
 }
 
-export const initializePlex = () => (dispatch, getState) => {
-  const state = getState()
-  const authToken = selectUser.authToken(state)
-
-  const client = new Client(config.options)
-  const account = new Account(client, authToken)
-
-  return dispatch({
-    type: PLEX_INITIALIZE,
-    payload: { client, account }
-  })
-}
-
 export const setPlexReady = () => ({
   type: PLEX_READY
 })
 
-export const usePlexServerConnection = (serverId, serverConnection) => {
+export const usePlexServerConnection = (serverId: number, serverConnection: ServerConnection) => {
   const library = new Library(serverConnection)
 
   return {
@@ -50,8 +38,8 @@ export const usePlexServerConnection = (serverId, serverConnection) => {
   }
 }
 
-export const usePlexServer = (serverId) => {
-  return (dispatch, getState) => {
+export const usePlexServer = (serverId: number) => {
+  return (dispatch: Function, getState: Function) => {
     const state = getState()
 
     const allStatuses = selectServerStatus.values(state)
@@ -70,14 +58,18 @@ export const clearPlexServerConnection = () => {
   }
 }
 
-export const usePlexLibrarySection = (librarySectionId) => {
+export const usePlexLibrarySection = (librarySectionId: number) => {
   return {
     type: PLEX_USE_LIBRARY_SECTION,
     payload: { librarySectionId }
   }
 }
 
-export default function reducer (state = initialState, action) {
+export default function reducer (state: Object, action: ReduxAction) {
+  if (state == null) {
+    state = initialState
+  }
+
   switch (action.type) {
     case actionTypes.INIT:
       return {
@@ -108,7 +100,7 @@ export default function reducer (state = initialState, action) {
   }
 }
 
-const rootSelector = (state) => state.plex.instance
+const rootSelector = (state: Object) => state.plex.instance
 
 export const selectPlex = {
   root: rootSelector,

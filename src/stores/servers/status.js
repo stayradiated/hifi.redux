@@ -1,24 +1,30 @@
+/* @flow */
+
 import { ServerConnection } from 'perplexed'
 
-import { createFetchMapStore } from '../../storeTemplates'
+import { createFetchMapStore } from '../../templates'
 
 import { FETCH_SERVER_STATUS } from '../../constants'
 import { fetchAccountServers } from './account'
 import { selectAllConnections } from './connections'
 import { selectAllDevices } from './devices'
 
+import type { Account, Server, Connection, ConnectionStatus } from '../../types'
+
 const TIMEOUT = 5 * 1000
 
-async function connect (account, server, connection) {
+async function connect (account: Account, server: Server, connection: Connection): Promise<ConnectionStatus> {
   const serverConnection = new ServerConnection(connection.uri, account)
+
   try {
     await serverConnection.fetch('/', { timeout: TIMEOUT })
-  } catch (e) {
+  } catch (error) {
     return {
       available: false,
       server: server.id
     }
   }
+
   return {
     available: true,
     server: server.id,
@@ -27,7 +33,7 @@ async function connect (account, server, connection) {
   }
 }
 
-export function connectMultiple (account, server, connections) {
+export function connectMultiple (account: Account, server: Server, connections: Array<Connection>): Promise<ConnectionStatus> {
   if (connections.length <= 0) {
     throw new Error('Must pass at least one connection')
   }
@@ -46,7 +52,7 @@ export function connectMultiple (account, server, connections) {
   })
 }
 
-const handleFetchServerStatus = (serverId) => {
+const handleFetchServerStatus = (serverId: string) => {
   return async (dispatch, getState) => {
     // make sure all the account servers have been fetched first
     await dispatch(fetchAccountServers())
@@ -57,7 +63,7 @@ const handleFetchServerStatus = (serverId) => {
     const server = allDevices.get(serverId)
     const connections = server.connections.map((id) => allConnections.get(id))
 
-    return dispatch({
+    dispatch({
       types: FETCH_SERVER_STATUS,
       payload: { id: serverId },
       meta: {

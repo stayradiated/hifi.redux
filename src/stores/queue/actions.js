@@ -1,3 +1,5 @@
+/* @flow */
+
 import { normalize } from 'perplexed'
 
 import {
@@ -17,26 +19,41 @@ import { selectAllArtists } from '../artists/all'
 import { value as getLibrarySections } from '../library/sections/selectors'
 import * as selectors from './selectors'
 
-export const fetchQueue = (queueId) => ({
+import type { Instance } from '../../types'
+
+export const fetchQueue = (queueId: number) => ({
   types: FETCH_QUEUE,
   payload: { queueId },
   meta: {
-    plex: ({ library }) => normalize(library.playQueue(queueId))
+    plex: ({ library }: Instance) => normalize(library.playQueue(queueId))
   }
 })
 
-export const createQueue = (options) => ({
+type $createQueueOptions = {
+  uri?: string,
+  playlistId?: number,
+  key?: string,
+  initialTrackId: number,
+}
+
+export const createQueue = (options: $createQueueOptions) => ({
   types: CREATE_QUEUE,
   payload: { ...options },
   meta: {
-    plex: ({ library }) => normalize(library.createQueue(options))
+    plex: ({ library }: Instance) => normalize(library.createQueue(options))
   }
 })
 
-export const createQueueFromURI = (options) => {
+type $createQueueFromURIOptions = {
+  source: string,
+  key?: string,
+  initialTrackId: number,
+}
+
+export const createQueueFromURI = (options: $createQueueFromURIOptions) => {
   const { source, key, initialTrackId } = options
 
-  return (dispatch, getState) => {
+  return (dispatch: Function, getState: Function) => {
     const state = getState()
     const sections = getLibrarySections(state)
     const sectionId = selectPlex.librarySectionId(state)
@@ -49,7 +66,7 @@ export const createQueueFromURI = (options) => {
   }
 }
 
-export const createQueueFromPlexMix = (trackId) => (dispatch, getState) => {
+export const createQueueFromPlexMix = (trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allTracks = selectAllTracks.values(state)
   const track = allTracks.get(trackId)
@@ -60,7 +77,7 @@ export const createQueueFromPlexMix = (trackId) => (dispatch, getState) => {
   }))
 }
 
-export const createQueueFromAlbum = (albumId, trackId) => (dispatch, getState) => {
+export const createQueueFromAlbum = (albumId: number, trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allAlbums = selectAllAlbums.values(state)
   const allTracks = selectAllTracks.values(state)
@@ -74,7 +91,7 @@ export const createQueueFromAlbum = (albumId, trackId) => (dispatch, getState) =
   }))
 }
 
-export const createQueueFromArtist = (artistId, trackId) => (dispatch, getState) => {
+export const createQueueFromArtist = (artistId: number, trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allArtists = selectAllArtists.values(state)
   const allTracks = selectAllTracks.values(state)
@@ -88,7 +105,7 @@ export const createQueueFromArtist = (artistId, trackId) => (dispatch, getState)
   }))
 }
 
-export const createQueueFromPlaylist = (playlistId, trackId) => (dispatch, getState) => {
+export const createQueueFromPlaylist = (playlistId: number, trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allTracks = selectAllTracks.values(state)
   const track = allTracks.get(trackId)
@@ -100,7 +117,7 @@ export const createQueueFromPlaylist = (playlistId, trackId) => (dispatch, getSt
   }))
 }
 
-export const createQueueFromTrack = (trackId) => (dispatch, getState) => {
+export const createQueueFromTrack = (trackId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const allTracks = selectAllTracks.values(state)
   const track = allTracks.get(trackId)
@@ -113,7 +130,7 @@ export const createQueueFromTrack = (trackId) => (dispatch, getState) => {
   }))
 }
 
-export const playQueueItem = (queueItemId, trackId) => ({
+export const playQueueItem = (queueItemId: number, trackId: number) => ({
   type: PLAY_QUEUE_ITEM,
   payload: {
     selectedItemId: queueItemId,
@@ -121,7 +138,13 @@ export const playQueueItem = (queueItemId, trackId) => ({
   }
 })
 
-export const moveQueueItem = ({ newIndex, oldIndex }) => (dispatch, getState) => {
+type $moveQueueItemOptions = {
+  newIndex: number,
+  oldIndex: number,
+}
+
+export const moveQueueItem = (options: $moveQueueItemOptions) => (dispatch: Function, getState: Function) => {
+  const { newIndex, oldIndex } = options
   const state = getState()
   const queueId = selectors.queueId(state)
   const items = selectors.items(state)
@@ -139,7 +162,7 @@ export const moveQueueItem = ({ newIndex, oldIndex }) => (dispatch, getState) =>
   })
 }
 
-export const shuffleQueue = () => (dispatch, getState) => {
+export const shuffleQueue = () => (dispatch: Function, getState: Function) => {
   const state = getState()
   const playQueueId = selectors.queueId(state)
   return dispatch({
@@ -150,7 +173,7 @@ export const shuffleQueue = () => (dispatch, getState) => {
   })
 }
 
-export const unshuffleQueue = () => (dispatch, getState) => {
+export const unshuffleQueue = () => (dispatch: Function, getState: Function) => {
   const state = getState()
   const playQueueId = selectors.queueId(state)
   return dispatch({
@@ -161,13 +184,13 @@ export const unshuffleQueue = () => (dispatch, getState) => {
   })
 }
 
-export const toggleShuffleQueue = () => (dispatch, getState) => {
+export const toggleShuffleQueue = () => (dispatch: Function, getState: Function) => {
   const state = getState()
   const shuffled = selectors.shuffled(state)
   return dispatch(shuffled ? unshuffleQueue() : shuffleQueue())
 }
 
-export const jumpToRelativeQueueItem = (delta) => (dispatch, getState) => {
+export const jumpToRelativeQueueItem = (delta: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
   const selectedItemId = selectors.selectedItemId(state)
   const items = selectors.items(state)

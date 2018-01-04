@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   ALBUM,
   SORT_ALBUMS_BY_TITLE,
@@ -16,7 +18,7 @@ import {
   RESET_LIBRARY_ALBUMS
 } from '../../constants'
 
-import { createLibraryTypeList } from '../../storeTemplates'
+import { createLibraryTypeList } from '../../templates'
 
 const store = createLibraryTypeList({
   type: ALBUM,
@@ -46,9 +48,8 @@ const store = createLibraryTypeList({
 })
 
 export const reducer = store.reducer
-export const fetchCurrentLibraryAlbumsRange = store.fetchCurrentLibraryTypeRange
 export const fetchLibraryAlbumsRange = store.fetchLibraryTypeRange
 export const forceFetchLibraryAlbumsRange = store.forceFetchLibraryTypeRange
-export const resetCurrentLibraryAlbums = store.resetCurrentLibraryType
+export const resetLibraryAlbums = store.resetLibraryType
 export const selectLibraryAlbums = store.selectors
 export const sortLibraryAlbums = store.sortLibraryType

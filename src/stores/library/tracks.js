@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   TRACK,
   SORT_TRACKS_BY_TITLE,
@@ -19,7 +21,7 @@ import {
   RESET_LIBRARY_TRACKS
 } from '../../constants'
 
-import { createLibraryTypeList } from '../../storeTemplates'
+import { createLibraryTypeList } from '../../templates'
 
 const store = createLibraryTypeList({
   type: TRACK,
@@ -52,9 +54,8 @@ const store = createLibraryTypeList({
 })
 
 export const reducer = store.reducer
-export const fetchCurrentLibraryTracksRange = store.fetchCurrentLibraryTypeRange
 export const fetchLibraryTracksRange = store.fetchLibraryTypeRange
 export const forceFetchLibraryTracksRange = store.forceFetchLibraryTypeRange
-export const resetCurrentLibraryTracks = store.resetCurrentLibraryType
+export const resetLibraryTracks = store.resetLibraryType
 export const selectLibraryTracks = store.selectors
 export const sortLibraryTracks = store.sortLibraryType
