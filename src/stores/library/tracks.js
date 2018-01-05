@@ -56,14 +56,18 @@ const store = createLibraryTypeList({
 const reducer = store.reducer
 const fetchLibraryTracksRange = store.fetchLibraryTypeRange
 const forceFetchLibraryTracksRange = store.forceFetchLibraryTypeRange
+const fetchCurrentLibraryTracksRange = store.fetchCurrentLibraryTypeRange
 const resetLibraryTracks = store.resetLibraryType
+const resetCurrentLibraryTracks = store.resetCurrentLibraryType
 const selectLibraryTracks = store.selectors
 const sortLibraryTracks = store.sortLibraryType
 
 export {
   fetchLibraryTracksRange,
   forceFetchLibraryTracksRange,
+  fetchCurrentLibraryTracksRange,
   resetLibraryTracks,
+  resetCurrentLibraryTracks,
   selectLibraryTracks,
   sortLibraryTracks
 }

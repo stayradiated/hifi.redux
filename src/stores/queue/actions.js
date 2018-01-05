@@ -12,7 +12,7 @@ import {
   MOVE_PLAY_QUEUE_ITEM
 } from '../../constants'
 
-import { selectPlex } from '../plex/instance'
+import { selectLibrarySectionId } from '../ui'
 import { selectAllTracks } from '../tracks/all'
 import { selectAllAlbums } from '../albums/all'
 import { selectAllArtists } from '../artists/all'
@@ -56,7 +56,7 @@ const createQueueFromURI = (options: $createQueueFromURIOptions) => {
   return (dispatch: Function, getState: Function) => {
     const state = getState()
     const sections = getLibrarySections(state)
-    const sectionId = selectPlex.librarySectionId(state)
+    const sectionId = selectLibrarySectionId(state)
     const section = sections.find((s) => s.id === sectionId)
 
     const path = encodeURIComponent(source)
@@ -121,7 +121,7 @@ const createQueueFromTrack = (trackId: number) => (dispatch: Function, getState:
   const state = getState()
   const allTracks = selectAllTracks.values(state)
   const track = allTracks.get(trackId)
-  const sectionId = selectPlex.librarySectionId(state)
+  const sectionId = selectLibrarySectionId(state)
 
   return dispatch(createQueueFromURI({
     key: track.key,

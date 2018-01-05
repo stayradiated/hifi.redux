@@ -8,6 +8,8 @@ import {
   createListSelector
 } from '@stayradiated/mandarin'
 
+import { selectLibrarySectionId } from '../stores/ui'
+
 import type { Dispatch, GetState, ReduxAction, ReduxType } from '../types'
 
 type $createLibraryTypeListOptions = {
@@ -59,6 +61,11 @@ export default function createLibraryTypeList (options: $createLibraryTypeListOp
 
   const selectors = createListSelector(rootSelector)
 
+  selectors.currentIds = createSelector(
+    selectLibrarySectionId,
+    selectors.values,
+    (sectionId, values) => values.get(sectionId) || [])
+
   selectors.sortKey = createSelector(rootSelector, (root) => {
     return root.sortOptions[root.sortBy][root.sortDesc ? 1 : 0]
   })
@@ -98,10 +105,24 @@ export default function createLibraryTypeList (options: $createLibraryTypeListOp
     })
   )
 
+  const fetchCurrentLibraryTypeRange = (start: number, end: number) => {
+    return (dispatch: Dispatch, getState: GetState) => {
+      const sectionId = selectLibrarySectionId(getState())
+      return dispatch(fetchLibraryTypeRange(sectionId, start, end))
+    }
+  }
+
   const resetLibraryType = (section: string) => ({
     type: RESET_LIBRARY_TYPE,
     payload: { section }
   })
+
+  const resetCurrentLibraryType = () => {
+    return (dispatch: Dispatch, getState: GetState) => {
+      const sectionId = selectLibrarySectionId(getState())
+      return dispatch(resetLibraryType(sectionId))
+    }
+  }
 
   const sortLibraryType = (sortBy: string, sortDesc: boolean) => ({
     type: SORT_LIBRARY_TYPE,
@@ -155,8 +176,10 @@ export default function createLibraryTypeList (options: $createLibraryTypeListOp
   return {
     fetchLibraryTypeRange,
     forceFetchLibraryTypeRange,
+    fetchCurrentLibraryTypeRange,
     reducer,
     resetLibraryType,
+    resetCurrentLibraryType,
     selectors,
     sortLibraryType
   }

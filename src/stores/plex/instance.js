@@ -7,7 +7,6 @@ import { actionTypes } from 'redux-localstorage'
 import {
   PLEX_INITIALIZE,
   PLEX_USE_SERVER,
-  PLEX_USE_LIBRARY_SECTION,
   PLEX_READY
 } from '../../constants'
 
@@ -21,8 +20,7 @@ const initialState = {
   account: null,
   serverConnection: null,
   library: null,
-  serverId: null,
-  libarySectionId: null
+  serverId: null
 }
 
 const setPlexReady = () => ({
@@ -58,13 +56,6 @@ const clearPlexServerConnection = () => {
   }
 }
 
-const usePlexLibrarySection = (librarySectionId: number) => {
-  return {
-    type: PLEX_USE_LIBRARY_SECTION,
-    payload: { librarySectionId }
-  }
-}
-
 function reducer (state: Object, action: ReduxAction) {
   if (state == null) {
     state = initialState
@@ -83,7 +74,6 @@ function reducer (state: Object, action: ReduxAction) {
 
     case PLEX_INITIALIZE:
     case PLEX_USE_SERVER:
-    case PLEX_USE_LIBRARY_SECTION:
       return {
         ...state,
         ...action.payload
@@ -109,15 +99,13 @@ const selectPlex = {
   client: createSelector(rootSelector, (root) => root.client),
   library: createSelector(rootSelector, (root) => root.library),
   serverConnection: createSelector(rootSelector, (root) => root.serverConnection),
-  serverId: createSelector(rootSelector, (root) => root.serverId),
-  librarySectionId: createSelector(rootSelector, (root) => root.librarySectionId)
+  serverId: createSelector(rootSelector, (root) => root.serverId)
 }
 
 export {
   clearPlexServerConnection,
   selectPlex,
   setPlexReady,
-  usePlexLibrarySection,
   usePlexServer,
   usePlexServerConnection
 }

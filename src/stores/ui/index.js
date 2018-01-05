@@ -5,18 +5,21 @@ import { createSelector } from 'reselect'
 import {
   UI_SET_DISPLAY_QUEUE,
   UI_SET_DISPLAY_PLAYER,
-  UI_SET_TRACK_TO_ADD_TO_PLAYLIST
+  UI_SET_TRACK_TO_ADD_TO_PLAYLIST,
+  UI_SET_LIBRARY_SECTION_ID
 } from '../../constants'
 
 import type { Dispatch, GetState, ReduxAction } from '../../types'
 
 const initialState = {
+  librarySectionId: null,
   displayQueue: false,
   displayPlayer: false,
   trackToAddToPlaylist: null
 }
 
 const root = (state) => state.ui
+const selectLibrarySectionId = createSelector(root, (_root) => _root.librarySectionId)
 const selectDisplayQueue = createSelector(root, (_root) => _root.displayQueue)
 const selectDisplayPlayer = createSelector(root, (_root) => _root.displayPlayer)
 const selectTrackToAddToPlaylist = createSelector(root, (_root) => _root.trackToAddToPlaylist)
@@ -55,6 +58,17 @@ const setTrackToAddToPlaylist = (trackId: string) => ({
 })
 
 /**
+ * LIBRARY SECTION ID
+ */
+
+const setLibrarySectionId = (librarySectionId: number) => {
+  return {
+    type: UI_SET_LIBRARY_SECTION_ID,
+    payload: librarySectionId
+  }
+}
+
+/**
  * REDUCER
  */
 
@@ -79,6 +93,11 @@ const reducer = (state: Object, action: ReduxAction) => {
         ...state,
         trackToAddToPlaylist: action.payload
       }
+    case UI_SET_LIBRARY_SECTION_ID:
+      return {
+        ...state,
+        librarySectionId: action.payload
+      }
     default:
       return state
   }
@@ -90,10 +109,12 @@ export {
   setDisplayPlayer,
   toggleDisplayPlayer,
   setTrackToAddToPlaylist,
+  setLibrarySectionId,
 
   selectDisplayPlayer,
   selectDisplayQueue,
-  selectTrackToAddToPlaylist
+  selectTrackToAddToPlaylist,
+  selectLibrarySectionId
 }
 
 export default reducer

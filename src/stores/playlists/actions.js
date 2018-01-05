@@ -6,14 +6,14 @@ import {
 } from '../../constants'
 
 import { value as getLibrarySections } from '../library/sections/selectors'
-import { selectPlex } from '../plex/instance'
+import { selectLibrarySectionId } from '../ui'
 import { selectAllTracks } from '../tracks/all'
 
 const addTrackToPlaylist = (trackId: number, playlistId: number) => (dispatch: Function, getState: Function) => {
   const state = getState()
 
   const sections = getLibrarySections(state)
-  const sectionId = selectPlex.librarySectionId(state)
+  const sectionId = selectLibrarySectionId(state)
   const section = sections.find((s) => s.id === sectionId)
 
   const allTracks = selectAllTracks.values(state)
