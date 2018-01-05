@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@stayradiated/mandarin": "^1.14.0",
+    "babel-polyfill": "^6.26.0",
     "perplexed": "^2.0.0",
     "redux": "^3.7.2",
     "redux-localstorage": "1.0.0-rc5",
