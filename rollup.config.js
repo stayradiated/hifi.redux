@@ -11,14 +11,18 @@ export default {
   plugins: [
     resolve(),
     json({
-      exclude: 'node_modules/**',
+      exclude: 'node_modules/**'
     }),
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
       presets: [
         'flow',
-        [ 'env', { targets: { chrome: 63 }, 'modules': false } ]
+        [ 'env', {
+          forceAllTransforms: true,
+          'modules': false,
+          'useBuiltIns': 'entry'
+        } ]
       ],
       plugins: [
         'external-helpers',

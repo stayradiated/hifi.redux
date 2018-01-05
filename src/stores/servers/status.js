@@ -33,7 +33,7 @@ async function connect (account: Account, server: Server, connection: Connection
   }
 }
 
-export function connectMultiple (account: Account, server: Server, connections: Array<Connection>): Promise<ConnectionStatus> {
+function connectMultiple (account: Account, server: Server, connections: Array<Connection>): Promise<ConnectionStatus> {
   if (connections.length <= 0) {
     throw new Error('Must pass at least one connection')
   }
@@ -52,7 +52,7 @@ export function connectMultiple (account: Account, server: Server, connections: 
   })
 }
 
-const handleFetchServerStatus = (serverId: string) => {
+function handleFetchServerStatus (serverId: string) {
   return async (dispatch, getState) => {
     // make sure all the account servers have been fetched first
     await dispatch(fetchAccountServers())
@@ -88,6 +88,7 @@ const forceFetchServerStatus = store.forceFetch
 const selectServerStatus = store.selectors
 
 export {
+  connectMultiple,
   fetchServerStatus,
   forceFetchServerStatus,
   selectServerStatus
