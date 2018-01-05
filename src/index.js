@@ -5,6 +5,7 @@ import createRootReducer from './stores'
 import initializePlex from './initializePlex'
 
 export * from './stores'
+export * from './constants'
 
 export {
   initializePlex,

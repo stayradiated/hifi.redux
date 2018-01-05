@@ -1,6 +1,7 @@
 /* @flow */
 
 import { createSelector } from 'reselect'
+import { actionTypes } from 'redux-localstorage'
 
 import {
   UI_SET_DISPLAY_QUEUE,
@@ -78,6 +79,15 @@ const reducer = (state: Object, action: ReduxAction) => {
   }
 
   switch (action.type) {
+    case actionTypes.INIT:
+      return {
+        ...state,
+        ...((
+          action.payload &&
+          action.payload.ui
+        ) || {})
+      }
+
     case UI_SET_DISPLAY_QUEUE:
       return {
         ...state,
