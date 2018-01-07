@@ -22,7 +22,9 @@ import type { Instance } from '../../types'
 const RATE_TRACK = c('RATE_TRACK')
 
 const store = createLibraryTypeStore({
-  constant: FETCH_TRACK,
+  actions: {
+    fetch: FETCH_TRACK
+  },
   libraryType: TRACK,
   entity: 'tracks',
   rootSelector: (state) => state.tracks.all,

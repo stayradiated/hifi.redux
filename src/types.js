@@ -11,6 +11,9 @@ export type Library = {
   createQueue: Function,
   metadataChildren: Function,
   metadata: Function,
+  editPlaylistTitle: Function,
+  removeFromPlaylist: Function,
+  addToPlaylist: Function
 }
 
 export type ServerConnection = {

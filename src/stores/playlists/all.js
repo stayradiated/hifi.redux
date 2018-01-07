@@ -12,7 +12,9 @@ import {
 } from '../../constants'
 
 const store = createLibraryTypeStore({
-  constant: FETCH_PLAYLIST,
+  actions: {
+    fetch: FETCH_PLAYLIST
+  },
   libraryType: PLAYLIST,
   entity: 'playlists',
   rootSelector: (state) => state.playlists.all,

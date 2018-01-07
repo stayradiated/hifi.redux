@@ -2,7 +2,11 @@
 
 import { TRACK, normalize } from 'perplexed'
 
-import { FETCH_PLAYLIST_ITEMS, RESET_PLAYLIST_ITEMS } from '../../constants'
+import {
+  FETCH_PLAYLIST_ITEMS,
+  RESET_PLAYLIST_ITEMS,
+  MOVE_PLAYLIST_ITEM
+} from '../../constants'
 
 import { createLibraryTypeChildrenStore } from '../../templates'
 
@@ -10,7 +14,8 @@ const store = createLibraryTypeChildrenStore({
   type: TRACK,
   actions: {
     fetch: FETCH_PLAYLIST_ITEMS,
-    reset: RESET_PLAYLIST_ITEMS
+    reset: RESET_PLAYLIST_ITEMS,
+    move: MOVE_PLAYLIST_ITEM
   },
   rootSelector: (state) => state.playlists.items,
   reducerOptions: {

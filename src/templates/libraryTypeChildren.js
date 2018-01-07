@@ -14,6 +14,7 @@ type $createLibraryTypeChildrenStoreOptions = {
   actions: {
     fetch: ReduxType,
     reset: string,
+    move?: ReduxType,
   },
   rootSelector: Function,
   reducerOptions: Object,
@@ -25,7 +26,8 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
     type: TYPE,
     actions: {
       fetch: FETCH_TYPE_CHILDREN,
-      reset: RESET_TYPE_CHILDREN
+      reset: RESET_TYPE_CHILDREN,
+      move: MOVE_TYPE_CHILDREN
     },
     rootSelector,
     reducerOptions = {},
@@ -33,13 +35,6 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
       normalize(library.metadataChildren(
         id, TYPE, { start, size: end - start, includeRelated: 1 }))
   } = options
-
-  console.assert(typeof TYPE === 'number', 'type missing')
-  console.assert(typeof FETCH_TYPE_CHILDREN === 'object', 'actions.fetch missing')
-  console.assert(typeof RESET_TYPE_CHILDREN === 'string', 'actions.reset missing')
-  console.assert(typeof rootSelector === 'function', 'rootSelector missing')
-  console.assert(typeof reducerOptions === 'object', 'reducerOptions missing')
-  console.assert(typeof fetchItems === 'function', 'fetchItems missing')
 
   const selectors = createMapListSelector(rootSelector)
 
@@ -89,6 +84,21 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
 
       case FETCH_TYPE_CHILDREN.SUCCESS:
         return asyncReducer.handleSuccess(state, action)
+
+      case MOVE_TYPE_CHILDREN && MOVE_TYPE_CHILDREN.REQUEST:
+        const { playlistId, oldIndex, newIndex } = action.payload
+
+        const values = new Map(state.values)
+        const updatedItems = [...values.get(playlistId)]
+        const item = updatedItems[oldIndex]
+        updatedItems.splice(oldIndex, 1)
+        updatedItems.splice(newIndex, 0, item)
+        values.set(playlistId, updatedItems)
+
+        return {
+          ...state,
+          values
+        }
 
       default:
         return state

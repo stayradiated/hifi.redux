@@ -13,7 +13,9 @@ import type { ReduxAction, ReduxType, Instance } from '../types'
 type $createLibraryTypeStoreOptions = {
   entity: string,
   libraryType: number,
-  constant: ReduxType,
+  actions: {
+    fetch: ReduxType
+  },
   rootSelector: Function,
   mergeActions?: Array<string>,
   customActions?: Object,
@@ -24,24 +26,18 @@ export default function createLibraryTypeStore (options: $createLibraryTypeStore
   const {
     entity,
     libraryType,
-    constant: TYPE,
+    actions: {
+      fetch: FETCH_TYPE
+    },
     rootSelector, mergeActions = [], customActions = {},
     fetchItems = ({ library }, id) =>
       normalize(library.metadata(id, libraryType))
   } = options
 
-  console.assert(typeof entity === 'string', 'entity missing')
-  console.assert(typeof libraryType === 'number', 'libraryType missing')
-  console.assert(Array.isArray(TYPE), 'constant missing')
-  console.assert(typeof rootSelector === 'function', 'rootSelector missing')
-  console.assert(Array.isArray(mergeActions), 'mergeActions missing')
-  console.assert(typeof customActions === 'object', 'customActions missing')
-  console.assert(typeof fetchItems === 'function', 'fetchItems missing')
-
   const selectors = createMapSelector(rootSelector)
 
   const forceFetchType = (id: string) => ({
-    types: TYPE,
+    types: FETCH_TYPE,
     payload: { id },
     meta: {
       plex: (plex: Instance) => fetchItems(plex, id)
@@ -78,13 +74,13 @@ export default function createLibraryTypeStore (options: $createLibraryTypeStore
     }
 
     switch (action.type) {
-      case TYPE.REQUEST:
+      case FETCH_TYPE.REQUEST:
         return asyncReducer.handleRequest(state, action)
 
-      case TYPE.FAILURE:
+      case FETCH_TYPE.FAILURE:
         return asyncReducer.handleFailure(state, action)
 
-      case TYPE.SUCCESS:
+      case FETCH_TYPE.SUCCESS:
         return asyncReducer.handleSuccess(state, action)
 
       default:

@@ -149,15 +149,16 @@ const moveQueueItem = (options: $moveQueueItemOptions) => (dispatch: Function, g
   const queueId = selectors.queueId(state)
   const items = selectors.items(state)
 
-  const playQueueId = items[oldIndex].id
-  const afterQueueId = items[newIndex - (oldIndex > newIndex ? 1 : 0)].id
+  const queueItemId = items[oldIndex].id
+  const afterQueueItem = items[newIndex - (oldIndex > newIndex ? 1 : 0)]
+  const afterQueueItemId = afterQueueItem != null ? afterQueueItem.id : null
 
   return dispatch({
     types: MOVE_PLAY_QUEUE_ITEM,
     payload: { newIndex, oldIndex },
     meta: {
       plex: ({ library }) =>
-        normalize(library.movePlayQueueItem(queueId, playQueueId, afterQueueId))
+        normalize(library.movePlayQueueItem(queueId, queueItemId, afterQueueItemId))
     }
   })
 }
