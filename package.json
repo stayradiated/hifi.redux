@@ -14,7 +14,7 @@
     "lint": "pkg-lint"
   },
   "devDependencies": {
-    "@mishguru/package": "^1.15.3",
+    "@mishguru/package": "^1.5.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup": "^0.53.3",
@@ -25,7 +25,7 @@
   "dependencies": {
     "@stayradiated/mandarin": "^1.14.0",
     "babel-polyfill": "^6.26.0",
-    "perplexed": "^2.0.0",
+    "perplexed": "^3.0.0",
     "redux": "^3.7.2",
     "redux-localstorage": "1.0.0-rc5",
     "redux-promise": "^0.5.3",

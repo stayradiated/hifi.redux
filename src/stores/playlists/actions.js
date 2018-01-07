@@ -2,7 +2,8 @@
 
 import {
   ADD_TRACK_TO_PLAYLIST,
-  REMOVE_TRACK_FROM_PLAYLIST
+  REMOVE_TRACK_FROM_PLAYLIST,
+  SET_PLAYLIST_TITLE
 } from '../../constants'
 
 import { value as getLibrarySections } from '../library/sections/selectors'
@@ -32,17 +33,24 @@ const addTrackToPlaylist = (trackId: number, playlistId: number) => (dispatch: F
   })
 }
 
-const removeItemFromPlaylist = (itemId: number, playlistId: number) => (dispatch: Function) => {
-  return dispatch({
-    types: REMOVE_TRACK_FROM_PLAYLIST,
-    payload: { itemId, playlistId },
-    meta: {
-      plex: ({ library }) => library.removeFromPlaylist(playlistId, itemId)
-    }
-  })
-}
+const removeItemFromPlaylist = (itemId: number, playlistId: number) => ({
+  types: REMOVE_TRACK_FROM_PLAYLIST,
+  payload: { itemId, playlistId },
+  meta: {
+    plex: ({ library }) => library.removeFromPlaylist(playlistId, itemId)
+  }
+})
+
+const setPlaylistTitle = (playlistId: number, title: string) => ({
+  types: SET_PLAYLIST_TITLE,
+  payload: { playlistId, title },
+  meta: {
+    plex: ({ library }) => library.editPlaylistTitle(playlistId, title)
+  }
+})
 
 export {
   addTrackToPlaylist,
-  removeItemFromPlaylist
+  removeItemFromPlaylist,
+  setPlaylistTitle
 }
