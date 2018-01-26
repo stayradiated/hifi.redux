@@ -15,6 +15,8 @@ type $createLibraryTypeChildrenStoreOptions = {
     fetch: ReduxType,
     reset: string,
     move?: ReduxType,
+    remove?: ReduxType,
+    add?: ReduxType
   },
   rootSelector: Function,
   reducerOptions: Object,
@@ -27,7 +29,9 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
     actions: {
       fetch: FETCH_TYPE_CHILDREN,
       reset: RESET_TYPE_CHILDREN,
-      move: MOVE_TYPE_CHILDREN
+      move: MOVE_TYPE_CHILDREN,
+      remove: REMOVE_TYPE_CHILDREN,
+      add: ADD_TYPE_CHILDREN
     },
     rootSelector,
     reducerOptions = {},
@@ -61,6 +65,41 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
     payload: { id }
   })
 
+  const handleMove = (state, action) => {
+    const { oldIndex, newIndex } = action.payload
+
+    return asyncReducer.modifyItemValues(state, action, (valueList) => {
+      const item = valueList[oldIndex]
+      valueList.splice(oldIndex, 1)
+      valueList.splice(newIndex, 0, item)
+      return valueList
+    })
+  }
+
+  const handleRemove = (state, action) => {
+    const { itemId } = action.payload
+
+    return asyncReducer.modifyItemValues(state, action, (valueList) => {
+      const index = valueList.findIndex((item) => item.id === itemId)
+      valueList.splice(index, 1)
+      return valueList
+    })
+  }
+
+  const handleAdd = (state, action) => {
+    const { trackId } = action.payload
+
+    return asyncReducer.modifyItemValues(state, action, (valueList, playlistId) => {
+      valueList.push({
+        id: 0,
+        playlistId,
+        track: trackId,
+        _type: 'playlistItem'
+      })
+      return valueList
+    })
+  }
+
   const asyncReducer = new AsyncMapListReducer({
     getId: (action) => action.payload.id,
     getTotal: (action) => action.value.result.id.totalSize,
@@ -86,19 +125,13 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
         return asyncReducer.handleSuccess(state, action)
 
       case MOVE_TYPE_CHILDREN && MOVE_TYPE_CHILDREN.REQUEST:
-        const { playlistId, oldIndex, newIndex } = action.payload
+        return handleMove(state, action)
 
-        const values = new Map(state.values)
-        const updatedItems = [...values.get(playlistId)]
-        const item = updatedItems[oldIndex]
-        updatedItems.splice(oldIndex, 1)
-        updatedItems.splice(newIndex, 0, item)
-        values.set(playlistId, updatedItems)
+      case REMOVE_TYPE_CHILDREN && REMOVE_TYPE_CHILDREN.REQUEST:
+        return handleRemove(state, action)
 
-        return {
-          ...state,
-          values
-        }
+      case ADD_TYPE_CHILDREN && ADD_TYPE_CHILDREN.REQUEST:
+        return handleAdd(state, action)
 
       default:
         return state

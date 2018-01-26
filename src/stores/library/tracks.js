@@ -21,9 +21,9 @@ import {
   RESET_LIBRARY_TRACKS
 } from '../../constants'
 
-import { createLibraryTypeList } from '../../templates'
+import { createLibraryTypeListStore } from '../../templates'
 
-const store = createLibraryTypeList({
+const store = createLibraryTypeListStore({
   type: TRACK,
   actions: {
     fetch: FETCH_LIBRARY_TRACKS,

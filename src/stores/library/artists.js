@@ -14,9 +14,9 @@ import {
   RESET_LIBRARY_ARTISTS
 } from '../../constants'
 
-import { createLibraryTypeList } from '../../templates'
+import { createLibraryTypeListStore } from '../../templates'
 
-const store = createLibraryTypeList({
+const store = createLibraryTypeListStore({
   type: ARTIST,
   actions: {
     fetch: FETCH_LIBRARY_ARTISTS,

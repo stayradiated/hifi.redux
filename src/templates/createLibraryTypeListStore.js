@@ -12,7 +12,7 @@ import { selectLibrarySectionId } from '../stores/ui'
 
 import type { Dispatch, GetState, ReduxAction, ReduxType } from '../types'
 
-type $createLibraryTypeListOptions = {
+type $createLibraryTypeListStoreOptions = {
   type: number,
   actions: {
     fetch: ReduxType,
@@ -29,7 +29,7 @@ type $createLibraryTypeListOptions = {
   fetchItems?: Function,
 }
 
-export default function createLibraryTypeList (options: $createLibraryTypeListOptions) {
+export default function createLibraryTypeListStore (options: $createLibraryTypeListStoreOptions) {
   const {
     type: TYPE,
     actions: {

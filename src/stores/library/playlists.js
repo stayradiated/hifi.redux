@@ -18,9 +18,9 @@ import {
   RESET_LIBRARY_PLAYLISTS
 } from '../../constants'
 
-import { createLibraryTypeList } from '../../templates'
+import { createLibraryTypeListStore } from '../../templates'
 
-const store = createLibraryTypeList({
+const store = createLibraryTypeListStore({
   type: PLAYLIST,
   actions: {
     fetch: FETCH_LIBRARY_PLAYLISTS,

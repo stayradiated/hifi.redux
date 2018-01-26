@@ -6,7 +6,7 @@ import type { ReduxAction, ReduxStore } from '../types'
 
 export default function plexMiddleware (store: ReduxStore) {
   return (next: Function) => (action: ReduxAction) => {
-    if (!action || !action.meta || !('plex' in action.meta)) {
+    if (action == null || action.meta == null || action.meta.plex == null) {
       return next(action)
     }
 

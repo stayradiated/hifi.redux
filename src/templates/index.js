@@ -1,17 +1,17 @@
 /* @flow */
 
-import createFetchValueStore from './fetchValue'
-import createFetchMapStore from './fetchMap'
-import createLibraryTypeChildrenStore from './libraryTypeChildren'
-import createLibraryTypeList from './libraryTypeList'
-import createLibraryTypeStore from './libraryType'
-import createPassiveMapStore from './passiveMap'
+import createFetchValueStore from './createFetchValueStore'
+import createFetchMapStore from './createFetchMapStore'
+import createLibraryTypeChildrenStore from './createLibraryTypeChildrenStore'
+import createLibraryTypeListStore from './createLibraryTypeListStore'
+import createLibraryTypeStore from './createLibraryTypeStore'
+import createPassiveMapStore from './createPassiveMapStore'
 
 export {
   createFetchValueStore,
   createFetchMapStore,
   createLibraryTypeChildrenStore,
-  createLibraryTypeList,
+  createLibraryTypeListStore,
   createLibraryTypeStore,
   createPassiveMapStore
 }
