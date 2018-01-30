@@ -68,7 +68,7 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
   const handleMove = (state, action) => {
     const { oldIndex, newIndex } = action.payload
 
-    return asyncReducer.modifyItemValues(state, action, (valueList) => {
+    return asyncReducer.modifyItemValuesForAction(state, action, (valueList) => {
       const item = valueList[oldIndex]
       valueList.splice(oldIndex, 1)
       valueList.splice(newIndex, 0, item)
@@ -79,7 +79,7 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
   const handleRemove = (state, action) => {
     const { itemId } = action.payload
 
-    return asyncReducer.modifyItemValues(state, action, (valueList) => {
+    return asyncReducer.modifyItemValuesForAction(state, action, (valueList) => {
       const index = valueList.findIndex((item) => item.id === itemId)
       valueList.splice(index, 1)
       return valueList
@@ -89,7 +89,7 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
   const handleAdd = (state, action) => {
     const { trackId } = action.payload
 
-    return asyncReducer.modifyItemValues(state, action, (valueList, playlistId) => {
+    return asyncReducer.modifyItemValuesForAction(state, action, (valueList, playlistId) => {
       valueList.push({
         id: 0,
         playlistId,
