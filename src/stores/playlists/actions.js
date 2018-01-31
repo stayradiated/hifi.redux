@@ -30,7 +30,7 @@ const addTrackToPlaylist = (trackId: number, playlistId: number) => (dispatch: F
 
   return dispatch({
     types: ADD_TRACK_TO_PLAYLIST,
-    payload: { trackId, playlistId },
+    payload: { id: playlistId, trackId },
     meta: {
       plex: ({ library }: Instance) => library.addToPlaylist(playlistId, uri)
     }
@@ -39,7 +39,7 @@ const addTrackToPlaylist = (trackId: number, playlistId: number) => (dispatch: F
 
 const removeItemFromPlaylist = (itemId: number, playlistId: number) => ({
   types: REMOVE_TRACK_FROM_PLAYLIST,
-  payload: { itemId, playlistId },
+  payload: { id: playlistId, itemId },
   meta: {
     plex: ({ library }: Instance) => library.removeFromPlaylist(playlistId, itemId)
   }
@@ -47,7 +47,7 @@ const removeItemFromPlaylist = (itemId: number, playlistId: number) => ({
 
 const setPlaylistTitle = (playlistId: number, title: string) => ({
   types: SET_PLAYLIST_TITLE,
-  payload: { playlistId, title },
+  payload: { id: playlistId, title },
   meta: {
     plex: ({ library }: Instance) => library.editPlaylistTitle(playlistId, title)
   }
@@ -71,7 +71,7 @@ const movePlaylistItem = (options: $movePlaylistItemOptions) => (dispatch: Dispa
 
   return dispatch({
     types: MOVE_PLAYLIST_ITEM,
-    payload: { playlistId, newIndex, oldIndex },
+    payload: { id: playlistId, newIndex, oldIndex },
     meta: {
       plex: ({ library }) => library.movePlaylistItem(playlistId, itemId, afterItemId)
     }
