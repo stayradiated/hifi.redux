@@ -68,7 +68,10 @@ const reducer = (state: Object, action: ReduxAction) => {
         playerState
       }))
 
-      clearTimeout(state.timeout)
+      if (state.timeout != null) {
+        clearTimeout(state.timeout)
+      }
+
       nextState.timeout = timeout
       return nextState
     }

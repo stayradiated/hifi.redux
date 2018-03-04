@@ -15,41 +15,54 @@ const TIMEOUT = 5 * 1000
 
 async function connect (account: Account, server: Server, connection: Connection): Promise<ConnectionStatus> {
   const serverConnection = new ServerConnection(connection.uri, account)
+  const startTime = Date.now()
 
   try {
     await serverConnection.fetch('/', { timeout: TIMEOUT })
   } catch (error) {
     return {
+      connection,
+      ping: 0,
       available: false,
       server: server.id
     }
   }
 
+  const ping = Date.now() - startTime
+
   return {
+    connection,
     available: true,
+    ping,
     server: server.id,
-    connection: connection.uri,
     serverConnection
   }
 }
 
-function connectMultiple (account: Account, server: Server, connections: Array<Connection>): Promise<ConnectionStatus> {
+async function connectMultiple (account: Account, server: Server, connections: Array<Connection>): Promise<ConnectionStatus> {
   if (connections.length <= 0) {
     throw new Error('Must pass at least one connection')
   }
 
-  return new Promise((resolve, reject) => {
-    Promise.all(connections.map(async (c) => {
-      const connection = await connect(account, server, c)
-      if (connection.available) {
-        resolve(connection)
-      }
-      return connection
-    })).then((results) => {
-      // none of the connections were successful
-      resolve(results[0])
-    }).catch(reject)
-  })
+  const results = await Promise.all(connections.map(async (c) => {
+    const connection = await connect(account, server, c)
+    return connection
+  }))
+
+  // sort by ping in ascending order
+  results.sort((a, b) => a.ping - b.ping)
+
+  const local = results.find((connection) => connection.local)
+  if (local != null && local.available) {
+    return local
+  }
+
+  const available = results.find((connection) => connection.available)
+  if (available != null) {
+    return available
+  }
+
+  return results[0]
 }
 
 function handleFetchServerStatus (serverId: string) {

@@ -18,6 +18,7 @@ type $createLibraryTypeListStoreOptions = {
     fetch: ReduxType,
     sort: string,
     reset: string,
+    filter?: string
   },
   sort: {
     default: string,
@@ -35,7 +36,8 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
     actions: {
       fetch: FETCH_LIBRARY_TYPE,
       sort: SORT_LIBRARY_TYPE,
-      reset: RESET_LIBRARY_TYPE
+      reset: RESET_LIBRARY_TYPE,
+      filter: FILTER_LIBRARY_TYPE
     },
     sort: {
       default: defaultSortBy,
@@ -70,6 +72,10 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
     return root.sortOptions[root.sortBy][root.sortDesc ? 1 : 0]
   })
 
+  selectors.filter = createSelector(rootSelector, (root) => {
+    return root.filter
+  })
+
   selectors.sortBy = createSelector(rootSelector, (root) =>
     root.sortBy)
 
@@ -81,12 +87,20 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
 
   const forceFetchLibraryTypeRange = (section: string, start: number, end: number) =>
     (dispatch: Dispatch, getState: GetState) => {
-      const sort = selectors.sortKey(getState())
-      const params = { start, size: end - start, sort }
+      const state = getState()
+      const sort = selectors.sortKey(state)
+      const filter = selectors.filter(state)
+
+      const params = {
+        start,
+        size: end - start,
+        sort,
+        ...filter
+      }
 
       return dispatch({
         types: FETCH_LIBRARY_TYPE,
-        payload: { section, start, end },
+        payload: { section, start, end, params },
         meta: {
           plex: (plex) => fetchItems(plex, section, params)
         }
@@ -129,6 +143,11 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
     payload: { sortBy, sortDesc }
   })
 
+  const filterLibraryType = (filter: {[string]: string}) => ({
+    type: FILTER_LIBRARY_TYPE,
+    payload: { filter }
+  })
+
   const asyncReducer = new AsyncMapListReducer({
     getId: (action) => action.payload.section,
     getTotal: (action) => action.value.result.id.totalSize,
@@ -139,7 +158,8 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
     ...asyncReducer.initialState,
     sortBy: defaultSortBy,
     sortDesc: defaultSortDesc,
-    sortOptions
+    sortOptions,
+    filter: {}
   }
 
   const reducer = (state: Object, action: ReduxAction) => {
@@ -168,6 +188,13 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
       case RESET_LIBRARY_TYPE:
         return asyncReducer.handleReset(state, action)
 
+      case FILTER_LIBRARY_TYPE:
+        const { filter } = action.payload
+        return {
+          ...initialState,
+          filter
+        }
+
       default:
         return state
     }
@@ -181,6 +208,7 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
     resetLibraryType,
     resetCurrentLibraryType,
     selectors,
-    sortLibraryType
+    sortLibraryType,
+    filterLibraryType
   }
 }

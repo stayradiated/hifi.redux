@@ -12,7 +12,7 @@ import type { ReduxAction, ReduxType, Instance } from '../types'
 
 type $createLibraryTypeStoreOptions = {
   entity: string,
-  libraryType: number,
+  libraryType?: number,
   actions: {
     fetch: ReduxType
   },

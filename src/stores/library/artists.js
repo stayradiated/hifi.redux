@@ -11,7 +11,8 @@ import {
 import {
   FETCH_LIBRARY_ARTISTS,
   SORT_LIBRARY_ARTISTS,
-  RESET_LIBRARY_ARTISTS
+  RESET_LIBRARY_ARTISTS,
+  FILTER_LIBRARY_ARTISTS,
 } from '../../constants'
 
 import { createLibraryTypeListStore } from '../../templates'
@@ -21,7 +22,8 @@ const store = createLibraryTypeListStore({
   actions: {
     fetch: FETCH_LIBRARY_ARTISTS,
     sort: SORT_LIBRARY_ARTISTS,
-    reset: RESET_LIBRARY_ARTISTS
+    reset: RESET_LIBRARY_ARTISTS,
+    filter: FILTER_LIBRARY_ARTISTS,
   },
   sort: {
     default: 'Date Added',

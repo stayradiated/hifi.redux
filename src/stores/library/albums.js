@@ -15,7 +15,8 @@ import {
 import {
   FETCH_LIBRARY_ALBUMS,
   SORT_LIBRARY_ALBUMS,
-  RESET_LIBRARY_ALBUMS
+  RESET_LIBRARY_ALBUMS,
+  FILTER_LIBRARY_ALBUMS
 } from '../../constants'
 
 import { createLibraryTypeListStore } from '../../templates'
@@ -25,7 +26,8 @@ const store = createLibraryTypeListStore({
   actions: {
     fetch: FETCH_LIBRARY_ALBUMS,
     sort: SORT_LIBRARY_ALBUMS,
-    reset: RESET_LIBRARY_ALBUMS
+    reset: RESET_LIBRARY_ALBUMS,
+    filter: FILTER_LIBRARY_ALBUMS
   },
   sort: {
     default: 'Date Added',

@@ -30,13 +30,17 @@ export type Server = {
 }
 
 export type Connection = {
-  uri: string,
+  address: string,
+  local: boolean,
+  port: string,
+  protocol: string,
+  uri: string
 }
 
 export type ConnectionStatus = {
   available: boolean,
   server: string,
-  connection?: string,
+  connection?: Connection,
   serverConnection?: ServerConnection,
 }
 

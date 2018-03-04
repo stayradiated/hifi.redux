@@ -18,7 +18,8 @@ import {
 import {
   FETCH_LIBRARY_TRACKS,
   SORT_LIBRARY_TRACKS,
-  RESET_LIBRARY_TRACKS
+  RESET_LIBRARY_TRACKS,
+  FILTER_LIBRARY_TRACKS
 } from '../../constants'
 
 import { createLibraryTypeListStore } from '../../templates'
@@ -28,7 +29,8 @@ const store = createLibraryTypeListStore({
   actions: {
     fetch: FETCH_LIBRARY_TRACKS,
     sort: SORT_LIBRARY_TRACKS,
-    reset: RESET_LIBRARY_TRACKS
+    reset: RESET_LIBRARY_TRACKS,
+    filter: FILTER_LIBRARY_TRACKS
   },
   sort: {
     default: 'Date Added',
@@ -61,6 +63,7 @@ const resetLibraryTracks = store.resetLibraryType
 const resetCurrentLibraryTracks = store.resetCurrentLibraryType
 const selectLibraryTracks = store.selectors
 const sortLibraryTracks = store.sortLibraryType
+const filterLibraryTracks = store.filterLibraryType
 
 export {
   fetchLibraryTracksRange,
@@ -69,7 +72,8 @@ export {
   resetLibraryTracks,
   resetCurrentLibraryTracks,
   selectLibraryTracks,
-  sortLibraryTracks
+  sortLibraryTracks,
+  filterLibraryTracks
 }
 
 export default reducer
