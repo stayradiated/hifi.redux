@@ -1,6 +1,7 @@
 /* @flow */
 
 import { ServerConnection } from 'perplexed'
+import { timeout } from 'promise-timeout'
 
 import { createFetchMapStore } from '../../templates'
 
@@ -18,11 +19,13 @@ async function connect (account: Account, server: Server, connection: Connection
   const startTime = Date.now()
 
   try {
-    await serverConnection.fetch('/', { timeout: TIMEOUT })
+    await timeout(serverConnection.fetch('/', {
+      timeout: TIMEOUT
+    }), TIMEOUT)
   } catch (error) {
     return {
       connection,
-      ping: 0,
+      ping: Infinity,
       available: false,
       server: server.id
     }
@@ -44,24 +47,24 @@ async function connectMultiple (account: Account, server: Server, connections: A
     throw new Error('Must pass at least one connection')
   }
 
-  const results = await Promise.all(connections.map(async (c) => {
-    const connection = await connect(account, server, c)
-    return connection
+  const results = await Promise.all(connections.map(async (c, i) => {
+    const result = await connect(account, server, c)
+    return result
   }))
 
   // sort by ping in ascending order
   results.sort((a, b) => a.ping - b.ping)
 
-  const local = results.find((connection) => connection.local)
+  const local = results.find((result) => result.connection.local)
   if (local != null && local.available) {
     return local
   }
 
-  const available = results.find((connection) => connection.available)
+  const available = results.find((result) => result.available)
   if (available != null) {
     return available
   }
-
+  
   return results[0]
 }
 

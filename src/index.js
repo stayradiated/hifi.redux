@@ -1,6 +1,6 @@
 /* @flow */
 
-import 'babel-polyfill'
+import '@babel/polyfill'
 
 import middleware from './middleware'
 import createRootReducer from './stores'
