@@ -192,6 +192,8 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
         const { filter } = action.payload
         return {
           ...initialState,
+          sortBy: state.sortBy,
+          sortDesc: state.sortDesc,
           filter
         }
 
