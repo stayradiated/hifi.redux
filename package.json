@@ -12,8 +12,7 @@
     "flow": "pkg-flow",
     "coverage": "pkg-coverage",
     "lint": "pkg-lint",
-    "tidy": "pkg-tidy",
-    "precommit": "pkg-precommit"
+    "tidy": "pkg-tidy"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.3.1",
@@ -37,5 +36,10 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pkg-precommit"
+    }
   }
 }
