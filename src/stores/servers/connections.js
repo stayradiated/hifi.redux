@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { createPassiveMapStore } from '../../templates'
 
@@ -16,8 +16,6 @@ const store = createPassiveMapStore({
 const reducer = store.reducer
 const selectAllConnections = store.selectors
 
-export {
-  selectAllConnections
-}
+export { selectAllConnections }
 
 export default reducer

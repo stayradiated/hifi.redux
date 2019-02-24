@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { createSelector } from 'reselect'
 import { createValueSelector, exportValue } from '@stayradiated/mandarin'
@@ -22,15 +22,10 @@ const { error, fetched, promise, value } = selectors
 const artists = createSelector(artistHub, selectAllArtists.values, resolve)
 const albums = createSelector(albumHub, selectAllAlbums.values, resolve)
 const tracks = createSelector(trackHub, selectAllTracks.values, resolve)
-const playlists = createSelector(playlistHub, selectAllPlaylists.values, resolve)
+const playlists = createSelector(
+  playlistHub,
+  selectAllPlaylists.values,
+  resolve
+)
 
-export {
-  error,
-  fetched,
-  promise,
-  value,
-  artists,
-  albums,
-  tracks,
-  playlists
-}
+export { error, fetched, promise, value, artists, albums, tracks, playlists }

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { actionTypes } from 'redux-localstorage'
 import { createSelector } from 'reselect'
@@ -48,8 +48,6 @@ const selectUser = {
   authToken: createSelector(rootSelector, (root) => root.authToken)
 }
 
-export {
-  selectUser
-}
+export { selectUser }
 
 export default reducer

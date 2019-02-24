@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { normalize } from 'perplexed'
 
@@ -14,6 +14,4 @@ const fetchSearchResults = (query: string, limit: number) => ({
   }
 })
 
-export {
-  fetchSearchResults
-}
+export { fetchSearchResults }

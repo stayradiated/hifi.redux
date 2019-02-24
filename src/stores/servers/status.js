@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { ServerConnection } from 'perplexed'
 import { timeout } from 'promise-timeout'
@@ -14,14 +14,21 @@ import type { Account, Server, Connection, ConnectionStatus } from '../../types'
 
 const TIMEOUT = 5 * 1000
 
-async function connect (account: Account, server: Server, connection: Connection): Promise<ConnectionStatus> {
+async function connect (
+  account: Account,
+  server: Server,
+  connection: Connection
+): Promise<ConnectionStatus> {
   const serverConnection = new ServerConnection(connection.uri, account)
   const startTime = Date.now()
 
   try {
-    await timeout(serverConnection.fetch('/', {
-      timeout: TIMEOUT
-    }), TIMEOUT)
+    await timeout(
+      serverConnection.fetch('/', {
+        timeout: TIMEOUT
+      }),
+      TIMEOUT
+    )
   } catch (error) {
     return {
       connection,
@@ -42,15 +49,25 @@ async function connect (account: Account, server: Server, connection: Connection
   }
 }
 
-async function connectMultiple (account: Account, server: Server, connections: Array<Connection>): Promise<ConnectionStatus> {
+async function connectMultiple (
+  account: Account,
+  server: Server,
+  connections: Array<Connection>
+): Promise<ConnectionStatus> {
   if (connections.length <= 0) {
     throw new Error('Must pass at least one connection')
   }
 
-  const results = await Promise.all(connections.map(async (c, i) => {
-    const result = await connect(account, server, c)
-    return result
-  }))
+  const results = await Promise.all(
+    connections.map(async (c, i) => {
+      const result = await connect(
+        account,
+        server,
+        c
+      )
+      return result
+    })
+  )
 
   // sort by ping in ascending order
   results.sort((a, b) => a.ping - b.ping)
@@ -64,7 +81,7 @@ async function connectMultiple (account: Account, server: Server, connections: A
   if (available != null) {
     return available
   }
-  
+
   return results[0]
 }
 

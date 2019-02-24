@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { normalize } from 'perplexed'
 
@@ -25,10 +25,6 @@ const fetchAccountServers = store.fetchValue
 const forceFetchAccountServers = store.forceFetchValue
 const selectAccountServers = store.selectors
 
-export {
-  fetchAccountServers,
-  forceFetchAccountServers,
-  selectAccountServers
-}
+export { fetchAccountServers, forceFetchAccountServers, selectAccountServers }
 
 export default reducer

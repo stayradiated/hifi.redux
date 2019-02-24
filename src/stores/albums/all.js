@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { ALBUM } from 'perplexed'
 
@@ -30,10 +30,6 @@ const fetchAlbum = store.fetchType
 const forceFetchAlbum = store.forceFetchType
 const selectAllAlbums = store.selectors
 
-export {
-  fetchAlbum,
-  forceFetchAlbum,
-  selectAllAlbums
-}
+export { fetchAlbum, forceFetchAlbum, selectAllAlbums }
 
 export default reducer

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   PLAYER_STATE_PAUSED,

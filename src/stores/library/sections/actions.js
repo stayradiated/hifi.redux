@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { cacheValue } from '@stayradiated/mandarin'
 
@@ -19,7 +19,4 @@ const fetchLibrarySections = cacheValue(() => ({
   dispatch: forceFetchLibrarySections
 }))
 
-export {
-  fetchLibrarySections,
-  forceFetchLibrarySections
-}
+export { fetchLibrarySections, forceFetchLibrarySections }

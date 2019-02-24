@@ -1,13 +1,8 @@
-/* @flow */
+// @flow
 
-import {
-  createValueSelector,
-  AsyncValueReducer
-} from '@stayradiated/mandarin'
+import { createValueSelector, AsyncValueReducer } from '@stayradiated/mandarin'
 
-import {
-  PLEX_AUTHENTICATE
-} from '../../constants'
+import { PLEX_AUTHENTICATE } from '../../constants'
 
 import type { Instance, ReduxAction } from '../../types'
 
@@ -50,9 +45,6 @@ const rootSelector = (root) => root.plex.auth
 
 const selectPlexAuth = createValueSelector(rootSelector)
 
-export {
-  authenticatePlex,
-  selectPlexAuth
-}
+export { authenticatePlex, selectPlexAuth }
 
 export default reducer

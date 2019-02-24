@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { combineReducers } from 'redux'
 
@@ -21,11 +21,11 @@ import * as selectSearch from './search/selectors'
 import * as selectTimeline from './timeline/selectors'
 
 type Options = {
-  reducers: Object
+  reducers?: Object
 }
 
-const createRootReducer = (options: Options) => {
-  const { reducers } = options
+const createRootReducer = (options: Options = {}) => {
+  const { reducers = {} } = options
 
   return combineReducers({
     ...reducers,
@@ -82,11 +82,6 @@ export * from './ui'
 
 export * from './user'
 
-export {
-  selectLibrarySections,
-  selectQueue,
-  selectSearch,
-  selectTimeline
-}
+export { selectLibrarySections, selectQueue, selectSearch, selectTimeline }
 
 export default createRootReducer

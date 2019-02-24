@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   cacheValue,
@@ -12,10 +12,12 @@ type $createFetchValueStoreOptions = {
   constant: ReduxType,
   rootSelector: Function,
   getActionOptions: Function,
-  reducerOptions: Object,
+  reducerOptions: Object
 }
 
-export default function createFetchValueStore (options: $createFetchValueStoreOptions) {
+export default function createFetchValueStore (
+  options: $createFetchValueStoreOptions
+) {
   const {
     constant: TYPE,
     rootSelector,

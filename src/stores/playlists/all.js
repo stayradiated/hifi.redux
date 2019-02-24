@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { PLAYLIST, normalize } from 'perplexed'
 
@@ -32,10 +32,6 @@ const fetchPlaylist = store.fetchType
 const forceFetchPlaylist = store.forceFetchType
 const selectAllPlaylists = store.selectors
 
-export {
-  fetchPlaylist,
-  forceFetchPlaylist,
-  selectAllPlaylists
-}
+export { fetchPlaylist, forceFetchPlaylist, selectAllPlaylists }
 
 export default reducer

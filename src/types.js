@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 /** * perplexed ***/
 
@@ -16,13 +16,12 @@ export type Library = {
   addToPlaylist: Function
 }
 
-export type ServerConnection = {
-}
+export type ServerConnection = {}
 
 export type Account = {
   authenticate: Function,
   requestPin: Function,
-  checkPin: Function,
+  checkPin: Function
 }
 
 export type Server = {
@@ -41,15 +40,14 @@ export type ConnectionStatus = {
   available: boolean,
   server: string,
   connection?: Connection,
-  serverConnection?: ServerConnection,
+  serverConnection?: ServerConnection
 }
 
-export type Track = {
-}
+export type Track = {}
 
 export type QueueItem = {
   id: string,
-  track: Track,
+  track: Track
 }
 
 /** * mandarin ***/
@@ -67,13 +65,13 @@ export type ReduxAction = {
   payload: any,
   value: any,
   meta: any,
-  error?: Error,
+  error?: Error
 }
 
 export type ReduxType = {
   REQUEST: string,
   FAILURE: string,
-  SUCCESS: string,
+  SUCCESS: string
 }
 
 /** * hifi.kitchen ***/
@@ -85,5 +83,5 @@ export type Instance = {
   serverConnection: ServerConnection,
   library: Library,
   serverId: string,
-  libarySectionId: string,
+  libarySectionId: string
 }

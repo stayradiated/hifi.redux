@@ -33,17 +33,20 @@ const store = createLibraryTypeListStore({
     getTotal: (action) => action.value.result.id.totalSize
   },
   fetchItems: ({ library }, section, options) =>
-    normalize(library.playlists({
-      ...options,
-      smart: 0,
-      playlistType: PLAYLIST_TYPE_MUSIC
-    }))
+    normalize(
+      library.playlists({
+        ...options,
+        smart: 0,
+        playlistType: PLAYLIST_TYPE_MUSIC
+      })
+    )
 })
 
 const reducer = store.reducer
 const fetchLibraryPlaylistsRegularRange = store.fetchLibraryTypeRange
 const forceFetchLibraryPlaylistsRegularRange = store.forceFetchLibraryTypeRange
-const fetchCurrentLibraryPlaylistsRegularRange = store.fetchCurrentLibraryTypeRange
+const fetchCurrentLibraryPlaylistsRegularRange =
+  store.fetchCurrentLibraryTypeRange
 const resetLibraryPlaylistsRegular = store.resetLibraryType
 const resetCurrentLibraryPlaylistsRegular = store.resetCurrentLibraryType
 const selectLibraryPlaylistsRegular = store.selectors

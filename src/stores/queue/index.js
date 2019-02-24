@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { actionTypes } from 'redux-localstorage'
 import {
@@ -27,7 +27,7 @@ const reducer = (state: Object, action: ReduxAction) => {
 
   switch (action.type) {
     case actionTypes.INIT:
-      return (action.payload && action.payload.queue)
+      return action.payload && action.payload.queue
         ? action.payload.queue
         : state
 
@@ -36,10 +36,12 @@ const reducer = (state: Object, action: ReduxAction) => {
       return {
         ...state,
         selectedItemId: 0,
-        items: [{
-          id: 0,
-          track: initialTrackId
-        }]
+        items: [
+          {
+            id: 0,
+            track: initialTrackId
+          }
+        ]
       }
 
     case SHUFFLE_PLAY_QUEUE.REQUEST:

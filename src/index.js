@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import '@babel/polyfill'
 
@@ -9,8 +9,4 @@ import initializePlex from './initializePlex'
 export * from './stores'
 export * from './constants'
 
-export {
-  initializePlex,
-  middleware,
-  createRootReducer
-}
+export { initializePlex, middleware, createRootReducer }

@@ -1,14 +1,10 @@
-/* @flow */
+// @flow
 
 import { createSelector } from 'reselect'
 import { Library, ServerConnection } from 'perplexed'
 import { actionTypes } from 'redux-localstorage'
 
-import {
-  PLEX_INITIALIZE,
-  PLEX_USE_SERVER,
-  PLEX_READY
-} from '../../constants'
+import { PLEX_INITIALIZE, PLEX_USE_SERVER, PLEX_READY } from '../../constants'
 
 import { selectServerStatus } from '../servers/status'
 
@@ -27,7 +23,10 @@ const setPlexReady = () => ({
   type: PLEX_READY
 })
 
-const usePlexServerConnection = (serverId: number, serverConnection: ServerConnection) => {
+const usePlexServerConnection = (
+  serverId: number,
+  serverConnection: ServerConnection
+) => {
   const library = new Library(serverConnection)
 
   return {
@@ -44,7 +43,9 @@ const usePlexServer = (serverId: number) => {
     const status = allStatuses.get(serverId)
 
     if (status != null && status.available) {
-      return dispatch(usePlexServerConnection(serverId, status.serverConnection))
+      return dispatch(
+        usePlexServerConnection(serverId, status.serverConnection)
+      )
     }
   }
 }
@@ -65,11 +66,10 @@ function reducer (state: Object, action: ReduxAction) {
     case actionTypes.INIT:
       return {
         ...state,
-        ...((
-          action.payload &&
+        ...((action.payload &&
           action.payload.plex &&
-          action.payload.plex.instance
-        ) || {})
+          action.payload.plex.instance) ||
+          {})
       }
 
     case PLEX_INITIALIZE:
@@ -98,7 +98,10 @@ const selectPlex = {
   account: createSelector(rootSelector, (root) => root.account),
   client: createSelector(rootSelector, (root) => root.client),
   library: createSelector(rootSelector, (root) => root.library),
-  serverConnection: createSelector(rootSelector, (root) => root.serverConnection),
+  serverConnection: createSelector(
+    rootSelector,
+    (root) => root.serverConnection
+  ),
   serverId: createSelector(rootSelector, (root) => root.serverId)
 }
 

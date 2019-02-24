@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   SET_PLAYER_CURRENT_TIME,
@@ -14,8 +14,7 @@ import { selectAllTracks } from '../tracks/all'
 
 import type { Dispatch, GetState, QueueItem, Instance } from '../../types'
 
-type $updateTimelineOptions = {
-}
+type $updateTimelineOptions = {}
 
 const updateTimeline = (options: $updateTimelineOptions) => ({
   types: UPDATE_TIMELINE,
@@ -42,16 +41,18 @@ const updatePlayerState = (playerState: string, queueItem: QueueItem) => {
       }
     }, CONFIG_TIMELINE_UPDATE_TIME)
 
-    return dispatch(updateTimeline({
-      trackId: track.id,
-      queueItemId: queueItem.id,
-      ratingKey: track.ratingKey,
-      key: track.key,
-      playerState,
-      currentTime,
-      duration: track.duration,
-      timeout
-    }))
+    return dispatch(
+      updateTimeline({
+        trackId: track.id,
+        queueItemId: queueItem.id,
+        ratingKey: track.ratingKey,
+        key: track.key,
+        playerState,
+        currentTime,
+        duration: track.duration,
+        timeout
+      })
+    )
   }
 }
 

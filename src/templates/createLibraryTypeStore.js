@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { normalize } from 'perplexed'
 import {
@@ -19,17 +19,19 @@ type $createLibraryTypeStoreOptions = {
   rootSelector: Function,
   mergeActions?: Array<string>,
   customActions?: Object,
-  fetchItems?: Function,
+  fetchItems?: Function
 }
 
-export default function createLibraryTypeStore (options: $createLibraryTypeStoreOptions) {
+export default function createLibraryTypeStore (
+  options: $createLibraryTypeStoreOptions
+) {
   const {
     entity,
     libraryType,
-    actions: {
-      fetch: FETCH_TYPE
-    },
-    rootSelector, mergeActions = [], customActions = {},
+    actions: { fetch: FETCH_TYPE },
+    rootSelector,
+    mergeActions = [],
+    customActions = {},
     fetchItems = ({ library }, id) =>
       normalize(library.metadata(id, libraryType))
   } = options
@@ -45,8 +47,9 @@ export default function createLibraryTypeStore (options: $createLibraryTypeStore
   })
 
   const containsRequiredAttributes = (map, requiredAttributes = []) =>
-    requiredAttributes.every((attribute) =>
-      map.has(attribute) && map.get(attribute) != null)
+    requiredAttributes.every(
+      (attribute) => map.has(attribute) && map.get(attribute) != null
+    )
 
   const fetchType = cacheMap((id, required) => ({
     id,

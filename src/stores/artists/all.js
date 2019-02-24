@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { ARTIST } from 'perplexed'
 
@@ -17,10 +17,7 @@ const store = createLibraryTypeStore({
   libraryType: ARTIST,
   entity: 'artists',
   rootSelector: (state) => state.artists.all,
-  mergeActions: [
-    FETCH_SEARCH_RESULTS.SUCCESS,
-    FETCH_LIBRARY_ARTISTS.SUCCESS
-  ]
+  mergeActions: [FETCH_SEARCH_RESULTS.SUCCESS, FETCH_LIBRARY_ARTISTS.SUCCESS]
 })
 
 const reducer = store.reducer
@@ -28,10 +25,6 @@ const fetchArtist = store.fetchType
 const forceFetchArtist = store.forceFetchType
 const selectAllArtists = store.selectors
 
-export {
-  fetchArtist,
-  forceFetchArtist,
-  selectAllArtists
-}
+export { fetchArtist, forceFetchArtist, selectAllArtists }
 
 export default reducer

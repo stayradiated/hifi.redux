@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   ADD_TRACK_TO_PLAYLIST,
@@ -14,7 +14,10 @@ import { selectAllTracks } from '../tracks/all'
 
 import type { Instance, Dispatch, GetState } from '../../types'
 
-const addTrackToPlaylist = (trackId: number, playlistId: number) => (dispatch: Function, getState: Function) => {
+const addTrackToPlaylist = (trackId: number, playlistId: number) => (
+  dispatch: Function,
+  getState: Function
+) => {
   const state = getState()
 
   const sections = getLibrarySections(state)
@@ -41,7 +44,8 @@ const removeItemFromPlaylist = (itemId: number, playlistId: number) => ({
   types: REMOVE_TRACK_FROM_PLAYLIST,
   payload: { id: playlistId, itemId },
   meta: {
-    plex: ({ library }: Instance) => library.removeFromPlaylist(playlistId, itemId)
+    plex: ({ library }: Instance) =>
+      library.removeFromPlaylist(playlistId, itemId)
   }
 })
 
@@ -49,7 +53,8 @@ const setPlaylistTitle = (playlistId: number, title: string) => ({
   types: SET_PLAYLIST_TITLE,
   payload: { id: playlistId, title },
   meta: {
-    plex: ({ library }: Instance) => library.editPlaylistTitle(playlistId, title)
+    plex: ({ library }: Instance) =>
+      library.editPlaylistTitle(playlistId, title)
   }
 })
 
@@ -59,7 +64,10 @@ type $movePlaylistItemOptions = {
   oldIndex: number
 }
 
-const movePlaylistItem = (options: $movePlaylistItemOptions) => (dispatch: Dispatch, getState: GetState) => {
+const movePlaylistItem = (options: $movePlaylistItemOptions) => (
+  dispatch: Dispatch,
+  getState: GetState
+) => {
   const { playlistId, newIndex, oldIndex } = options
   const state = getState()
   const allPlaylistItems = selectAllPlaylistItems.values(state)
@@ -73,7 +81,8 @@ const movePlaylistItem = (options: $movePlaylistItemOptions) => (dispatch: Dispa
     types: MOVE_PLAYLIST_ITEM,
     payload: { id: playlistId, newIndex, oldIndex },
     meta: {
-      plex: ({ library }) => library.movePlaylistItem(playlistId, itemId, afterItemId)
+      plex: ({ library }) =>
+        library.movePlaylistItem(playlistId, itemId, afterItemId)
     }
   })
 }

@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   AsyncMapReducer,
@@ -8,21 +8,27 @@ import {
 
 import { selectLibrarySectionId } from '../stores/ui'
 
-import type { Instance, Dispatch, GetState, ReduxAction, ReduxType } from '../types'
+import type {
+  Instance,
+  Dispatch,
+  GetState,
+  ReduxAction,
+  ReduxType
+} from '../types'
 
 type $createLibraryTypeMapStoreOptions = {
   actions: {
-    fetch: ReduxType,
+    fetch: ReduxType
   },
   rootSelector: Function,
-  fetchItems: Function,
+  fetchItems: Function
 }
 
-export default function createLibraryTypeMapStore (options: $createLibraryTypeMapStoreOptions) {
+export default function createLibraryTypeMapStore (
+  options: $createLibraryTypeMapStoreOptions
+) {
   const {
-    actions: {
-      fetch: FETCH_LIBRARY_TYPE
-    },
+    actions: { fetch: FETCH_LIBRARY_TYPE },
     rootSelector,
     fetchItems
   } = options

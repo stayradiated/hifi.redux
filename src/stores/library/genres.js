@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { createLibraryTypeMapStore } from '../../templates'
 
@@ -9,8 +9,7 @@ const store = createLibraryTypeMapStore({
     fetch: FETCH_LIBRARY_GENRES
   },
   rootSelector: (state) => state.library.genres,
-  fetchItems: ({ library }, sectionId) =>
-    library.countries(sectionId)
+  fetchItems: ({ library }, sectionId) => library.countries(sectionId)
 })
 
 const reducer = store.reducer

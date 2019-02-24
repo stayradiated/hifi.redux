@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { TRACK } from 'perplexed'
 import { c } from '@stayradiated/mandarin'
@@ -67,11 +67,6 @@ const forceFetchTrack = store.forceFetchType
 const fetchTrack = store.fetchType
 const selectAllTracks = store.selectors
 
-export {
-  forceFetchTrack,
-  fetchTrack,
-  selectAllTracks,
-  rateTrack
-}
+export { forceFetchTrack, fetchTrack, selectAllTracks, rateTrack }
 
 export default reducer

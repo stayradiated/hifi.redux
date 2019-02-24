@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   normalize,
@@ -45,10 +45,12 @@ const store = createLibraryTypeListStore({
     getTotal: (action) => action.value.result.id.totalSize
   },
   fetchItems: ({ library }, section, options) =>
-    normalize(library.playlists({
-      ...options,
-      playlistType: PLAYLIST_TYPE_MUSIC
-    }))
+    normalize(
+      library.playlists({
+        ...options,
+        playlistType: PLAYLIST_TYPE_MUSIC
+      })
+    )
 })
 
 const reducer = store.reducer

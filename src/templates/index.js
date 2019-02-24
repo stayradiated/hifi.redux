@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import createFetchMapStore from './createFetchMapStore'
 import createFetchValueStore from './createFetchValueStore'

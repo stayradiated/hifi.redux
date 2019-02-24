@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { createSelector } from 'reselect'
 import { normalize } from 'perplexed'
@@ -23,14 +23,16 @@ type $createLibraryTypeListStoreOptions = {
   sort: {
     default: string,
     descending: boolean,
-    options: { [string]: string },
+    options: { [string]: string }
   },
   rootSelector: Function,
   reducerOptions: Object,
-  fetchItems?: Function,
+  fetchItems?: Function
 }
 
-export default function createLibraryTypeListStore (options: $createLibraryTypeListStoreOptions) {
+export default function createLibraryTypeListStore (
+  options: $createLibraryTypeListStoreOptions
+) {
   const {
     type: TYPE,
     actions: {
@@ -51,11 +53,20 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
   } = options
 
   console.assert(typeof TYPE === 'number', 'type missing')
-  console.assert(typeof FETCH_LIBRARY_TYPE === 'object', 'actions.fetch missing')
+  console.assert(
+    typeof FETCH_LIBRARY_TYPE === 'object',
+    'actions.fetch missing'
+  )
   console.assert(typeof SORT_LIBRARY_TYPE === 'string', 'actions.sort missing')
-  console.assert(typeof RESET_LIBRARY_TYPE === 'string', 'actions.reset missing')
+  console.assert(
+    typeof RESET_LIBRARY_TYPE === 'string',
+    'actions.reset missing'
+  )
   console.assert(typeof defaultSortBy === 'string', 'sort.default missing')
-  console.assert(typeof defaultSortDesc === 'boolean', 'sort.descending missing')
+  console.assert(
+    typeof defaultSortDesc === 'boolean',
+    'sort.descending missing'
+  )
   console.assert(typeof sortOptions === 'object', 'sort.options missing')
   console.assert(typeof rootSelector === 'function', 'rootSelector missing')
   console.assert(typeof reducerOptions === 'object', 'reducerOptions missing')
@@ -66,7 +77,8 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
   selectors.currentIds = createSelector(
     selectLibrarySectionId,
     selectors.values,
-    (sectionId, values) => values.get(sectionId) || [])
+    (sectionId, values) => values.get(sectionId) || []
+  )
 
   selectors.sortKey = createSelector(rootSelector, (root) => {
     return root.sortOptions[root.sortBy][root.sortDesc ? 1 : 0]
@@ -76,48 +88,47 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
     return root.filter
   })
 
-  selectors.sortBy = createSelector(rootSelector, (root) =>
-    root.sortBy)
+  selectors.sortBy = createSelector(rootSelector, (root) => root.sortBy)
 
-  selectors.sortDesc = createSelector(rootSelector, (root) =>
-    root.sortDesc)
+  selectors.sortDesc = createSelector(rootSelector, (root) => root.sortDesc)
 
   selectors.sortOptions = createSelector(rootSelector, (root) =>
-    Object.keys(root.sortOptions))
+    Object.keys(root.sortOptions)
+  )
 
-  const forceFetchLibraryTypeRange = (section: string, start: number, end: number) =>
-    (dispatch: Dispatch, getState: GetState) => {
-      const state = getState()
-      const sort = selectors.sortKey(state)
-      const filter = selectors.filter(state)
+  const forceFetchLibraryTypeRange = (
+    section: string,
+    start: number,
+    end: number
+  ) => (dispatch: Dispatch, getState: GetState) => {
+    const state = getState()
+    const sort = selectors.sortKey(state)
+    const filter = selectors.filter(state)
 
-      const params = {
-        start,
-        size: end - start,
-        sort,
-        ...filter
-      }
-
-      return dispatch({
-        types: FETCH_LIBRARY_TYPE,
-        payload: { section, start, end, params },
-        meta: {
-          plex: (plex) => fetchItems(plex, section, params)
-        }
-      })
+    const params = {
+      start,
+      size: end - start,
+      sort,
+      ...filter
     }
 
-  const fetchLibraryTypeRange = cacheMapList(
-    (section, start, end) => ({
-      id: section,
-      range: [start, end],
-      selectors,
-      dispatch: (range) => {
-        return forceFetchLibraryTypeRange(
-          section, range[0], range[1])
+    return dispatch({
+      types: FETCH_LIBRARY_TYPE,
+      payload: { section, start, end, params },
+      meta: {
+        plex: (plex) => fetchItems(plex, section, params)
       }
     })
-  )
+  }
+
+  const fetchLibraryTypeRange = cacheMapList((section, start, end) => ({
+    id: section,
+    range: [start, end],
+    selectors,
+    dispatch: (range) => {
+      return forceFetchLibraryTypeRange(section, range[0], range[1])
+    }
+  }))
 
   const fetchCurrentLibraryTypeRange = (start: number, end: number) => {
     return (dispatch: Dispatch, getState: GetState) => {
@@ -143,7 +154,7 @@ export default function createLibraryTypeListStore (options: $createLibraryTypeL
     payload: { sortBy, sortDesc }
   })
 
-  const filterLibraryType = (filter: {[string]: string}) => ({
+  const filterLibraryType = (filter: { [string]: string }) => ({
     type: FILTER_LIBRARY_TYPE,
     payload: { filter }
   })

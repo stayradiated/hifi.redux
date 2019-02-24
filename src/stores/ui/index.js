@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { createSelector } from 'reselect'
 import { actionTypes } from 'redux-localstorage'
@@ -20,10 +20,16 @@ const initialState = {
 }
 
 const root = (state) => state.ui
-const selectLibrarySectionId = createSelector(root, (_root) => _root.librarySectionId)
+const selectLibrarySectionId = createSelector(
+  root,
+  (_root) => _root.librarySectionId
+)
 const selectDisplayQueue = createSelector(root, (_root) => _root.displayQueue)
 const selectDisplayPlayer = createSelector(root, (_root) => _root.displayPlayer)
-const selectTrackToAddToPlaylist = createSelector(root, (_root) => _root.trackToAddToPlaylist)
+const selectTrackToAddToPlaylist = createSelector(
+  root,
+  (_root) => _root.trackToAddToPlaylist
+)
 
 /**
  * DISPLAY QUEUE
@@ -82,10 +88,7 @@ const reducer = (state: Object, action: ReduxAction) => {
     case actionTypes.INIT:
       return {
         ...state,
-        ...((
-          action.payload &&
-          action.payload.ui
-        ) || {})
+        ...((action.payload && action.payload.ui) || {})
       }
 
     case UI_SET_DISPLAY_QUEUE:
@@ -120,7 +123,6 @@ export {
   toggleDisplayPlayer,
   setTrackToAddToPlaylist,
   setLibrarySectionId,
-
   selectDisplayPlayer,
   selectDisplayQueue,
   selectTrackToAddToPlaylist,

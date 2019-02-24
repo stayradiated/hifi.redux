@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   cacheValue,
@@ -6,10 +6,7 @@ import {
   AsyncValueReducer
 } from '@stayradiated/mandarin'
 
-import {
-  PLEX_CHECK_PIN,
-  PLEX_FETCH_PIN
-} from '../../constants'
+import { PLEX_CHECK_PIN, PLEX_FETCH_PIN } from '../../constants'
 
 import type { ReduxAction, Instance } from '../../types'
 
@@ -61,10 +58,6 @@ const reducer = (state: Object, action: ReduxAction) => {
   }
 }
 
-export {
-  fetchPin,
-  checkPin,
-  selectPin
-}
+export { fetchPin, checkPin, selectPin }
 
 export default reducer

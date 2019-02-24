@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { createValueSelector } from '@stayradiated/mandarin'
 
@@ -9,9 +9,4 @@ const fetched = selectors.fetched
 const promise = selectors.promise
 const value = selectors.value
 
-export {
-  error,
-  fetched,
-  promise,
-  value
-}
+export { error, fetched, promise, value }

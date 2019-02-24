@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   cacheMap,
@@ -13,7 +13,7 @@ type Options = {
   rootSelector: Function,
   forceFetch: Function,
   getCacheOptions: () => Object,
-  reducerOptions?: Object,
+  reducerOptions?: Object
 }
 
 export default function createFetchMapStore (options: Options) {

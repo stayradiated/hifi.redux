@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { actionTypes } from 'redux-localstorage'
 import { AsyncValueReducer } from '@stayradiated/mandarin'
@@ -20,7 +20,10 @@ const reducer = (state: Object, action: ReduxAction) => {
 
   switch (action.type) {
     case actionTypes.INIT:
-      return rehydrateValueReducer(state, action.payload, ['library', 'sections'])
+      return rehydrateValueReducer(state, action.payload, [
+        'library',
+        'sections'
+      ])
 
     case FETCH_LIBRARY_SECTIONS.REQUEST:
       return asyncReducer.handleRequest(state, action)

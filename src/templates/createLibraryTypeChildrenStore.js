@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { normalize } from 'perplexed'
 import {
@@ -20,10 +20,12 @@ type $createLibraryTypeChildrenStoreOptions = {
   },
   rootSelector: Function,
   reducerOptions: Object,
-  fetchItems?: Function,
+  fetchItems?: Function
 }
 
-export default function createLibraryTypeChildrenStore (options: $createLibraryTypeChildrenStoreOptions) {
+export default function createLibraryTypeChildrenStore (
+  options: $createLibraryTypeChildrenStoreOptions
+) {
   const {
     type: TYPE,
     actions: {
@@ -36,8 +38,13 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
     rootSelector,
     reducerOptions = {},
     fetchItems = ({ library }, id, start, end) =>
-      normalize(library.metadataChildren(
-        id, TYPE, { start, size: end - start, includeRelated: 1 }))
+      normalize(
+        library.metadataChildren(id, TYPE, {
+          start,
+          size: end - start,
+          includeRelated: 1
+        })
+      )
   } = options
 
   const selectors = createMapListSelector(rootSelector)
@@ -50,15 +57,12 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
     }
   })
 
-  const fetchTypeChildren = cacheMapList(
-    (id, start = 0, end = 50) => ({
-      id,
-      range: [start, end],
-      selectors,
-      dispatch: (range) => forceFetchTypeChildren(
-        id, range[0], range[1])
-    })
-  )
+  const fetchTypeChildren = cacheMapList((id, start = 0, end = 50) => ({
+    id,
+    range: [start, end],
+    selectors,
+    dispatch: (range) => forceFetchTypeChildren(id, range[0], range[1])
+  }))
 
   const resetTypeChildren = (id: string) => ({
     type: RESET_TYPE_CHILDREN,
@@ -68,36 +72,48 @@ export default function createLibraryTypeChildrenStore (options: $createLibraryT
   const handleMove = (state, action) => {
     const { oldIndex, newIndex } = action.payload
 
-    return asyncReducer.modifyItemValuesForAction(state, action, (valueList) => {
-      const item = valueList[oldIndex]
-      valueList.splice(oldIndex, 1)
-      valueList.splice(newIndex, 0, item)
-      return valueList
-    })
+    return asyncReducer.modifyItemValuesForAction(
+      state,
+      action,
+      (valueList) => {
+        const item = valueList[oldIndex]
+        valueList.splice(oldIndex, 1)
+        valueList.splice(newIndex, 0, item)
+        return valueList
+      }
+    )
   }
 
   const handleRemove = (state, action) => {
     const { itemId } = action.payload
 
-    return asyncReducer.modifyItemValuesForAction(state, action, (valueList) => {
-      const index = valueList.findIndex((item) => item.id === itemId)
-      valueList.splice(index, 1)
-      return valueList
-    })
+    return asyncReducer.modifyItemValuesForAction(
+      state,
+      action,
+      (valueList) => {
+        const index = valueList.findIndex((item) => item.id === itemId)
+        valueList.splice(index, 1)
+        return valueList
+      }
+    )
   }
 
   const handleAdd = (state, action) => {
     const { trackId } = action.payload
 
-    return asyncReducer.modifyItemValuesForAction(state, action, (valueList, playlistId) => {
-      valueList.push({
-        id: 0,
-        playlistId,
-        track: trackId,
-        _type: 'playlistItem'
-      })
-      return valueList
-    })
+    return asyncReducer.modifyItemValuesForAction(
+      state,
+      action,
+      (valueList, playlistId) => {
+        valueList.push({
+          id: 0,
+          playlistId,
+          track: trackId,
+          _type: 'playlistItem'
+        })
+        return valueList
+      }
+    )
   }
 
   const asyncReducer = new AsyncMapListReducer({

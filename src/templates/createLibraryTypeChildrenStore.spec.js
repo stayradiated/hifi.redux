@@ -41,9 +41,7 @@ test('actions: MOVE.REQUEST', (t) => {
   const store = createLibraryTypeChildrenStore(DEFAULT_OPTIONS)
 
   const state = {
-    values: new Map([
-      [0, [0, 1, 2, 3]]
-    ])
+    values: new Map([[0, [0, 1, 2, 3]]])
   }
 
   const action = {
@@ -54,9 +52,7 @@ test('actions: MOVE.REQUEST', (t) => {
   const nextState = store.reducer(state, action)
 
   t.deepEqual(nextState, {
-    values: new Map([
-      [0, [0, 2, 1, 3]]
-    ])
+    values: new Map([[0, [0, 2, 1, 3]]])
   })
 })
 
@@ -64,9 +60,7 @@ test('actions: REMOVE.REQUEST', (t) => {
   const store = createLibraryTypeChildrenStore(DEFAULT_OPTIONS)
 
   const state = {
-    values: new Map([
-      [0, [{ id: 10 }, { id: 20 }, { id: 30 }]]
-    ])
+    values: new Map([[0, [{ id: 10 }, { id: 20 }, { id: 30 }]]])
   }
 
   const action = {
@@ -77,8 +71,6 @@ test('actions: REMOVE.REQUEST', (t) => {
   const nextState = store.reducer(state, action)
 
   t.deepEqual(nextState, {
-    values: new Map([
-      [0, [{ id: 10 }, { id: 30 }]]
-    ])
+    values: new Map([[0, [{ id: 10 }, { id: 30 }]]])
   })
 })

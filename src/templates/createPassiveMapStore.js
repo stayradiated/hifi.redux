@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import {
   createObjectMergeFunction,
@@ -11,16 +11,11 @@ type Options = {
   constants: [string],
   entity: string,
   rootSelector: Function,
-  mergeOptions: Object,
+  mergeOptions: Object
 }
 
 export default function createPassiveMapStore (options: Options) {
-  const {
-    constants,
-    entity,
-    rootSelector,
-    mergeOptions = {}
-  } = options
+  const { constants, entity, rootSelector, mergeOptions = {} } = options
 
   const selectors = createMapSelector(rootSelector)
 

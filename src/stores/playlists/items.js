@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { TRACK, normalize } from 'perplexed'
 
@@ -35,8 +35,7 @@ const store = createLibraryTypeChildrenStore({
     }
   },
   fetchItems: ({ library }, playlistId, start, end) =>
-    normalize(library.playlistTracks(
-      playlistId, { start, size: end - start }))
+    normalize(library.playlistTracks(playlistId, { start, size: end - start }))
 })
 
 const reducer = store.reducer
